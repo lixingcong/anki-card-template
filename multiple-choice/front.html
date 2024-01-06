@@ -1,0 +1,24 @@
+<span id="question_type"></span> {{Question}}<br>
+<div id="options_div"></div>
+
+
+<script type="text/javascript">
+    var script = document.createElement('script');
+    script.innerHTML = "var cs = new CardStorage();";
+    document.head.appendChild(script);
+
+    cs.options = options_to_array("{{Options}}");
+    cs.answers = answer_to_array("{{Answers}}");
+    cs.options_no_prefix = option_array_remove_prefix(cs.options);
+    cs.options_prefix = option_array_get_prefix(cs.options)
+    cs.shuffled_indexes = shuffle(Array.from(Array(cs.options_prefix.length).keys()));
+
+    init_options();
+
+    if(is_mobile){
+        window.onunload = function() {
+            if (Persistence.isAvailable())
+                Persistence.setItem(cs);
+        };
+    }
+</script>
