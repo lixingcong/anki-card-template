@@ -138,7 +138,7 @@ function CardStorage() {
 function init_options(bindClick) {
     if(!cs.single_choice)
         document.getElementById("questionType").innerText = '【多选】'
-    
+
     var options_div = document.getElementById("options");
     var options = cs.shuffled_options()
 
@@ -186,18 +186,19 @@ function show_results() {
         }
     }
 
-    document.getElementById('tips').innerHTML = '正确选项：' + cs.correct_answers().join('') + '&nbsp;&nbsp;&nbsp;&nbsp;你的选项：' + cs.selected_answers().join('')
+    document.getElementById('correct-answer').innerHTML = cs.correct_answers().join('')
+    document.getElementById('your-answer').innerHTML = cs.selected_answers().join('')
 }
 
 function show_tags(tags){
     if (tags){
         tags = tags.split(' ')
-        var tagList = '<span class="tag-title">★</span>'
+        var tagList = ''
         for (var tag of tags) {
             if (tag)
-                tagList += '<span class="single-tag">' + tag + '</span>'
+                tagList += '<span class="tag">' + tag + '</span>'
         }
-        document.getElementById("tag").innerHTML = tagList
+        document.getElementById("tags").innerHTML = tagList
     }
 }
 

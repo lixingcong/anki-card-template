@@ -6,6 +6,7 @@
     --option-border: #525252;
     --tag-border: #525252;
     --hr: #525252;
+    --show-notes-btn: #525252;
 
     --selected-prefix-text: white;
     --selected-prefix-bg:var(--correct-border);
@@ -68,15 +69,11 @@
     border: 1px solid var(--selected-prefix-bg);
 }
 
-.tag{
+.tags{
     text-align: right;
 }
 
-.tag-title {
-    margin-left: 0.1em;
-}
-
-.single-tag {
+.tag {
     margin-left: 0.1em;
     padding: 0em 0.3em;
     border-radius: 5px;
@@ -85,6 +82,25 @@
 
 hr {
     border-color: var(--hr);
+}
+
+.tips {
+    display: block;
+    padding-bottom: 0.5em;
+    height: 1em;
+}
+
+.tips .compare-answer {
+    float: left;
+}
+
+.tips .reference {
+    float: right;
+}
+
+.show-notes-btn {
+    list-style: none;
+    color: var(--show-notes-btn);
 }
 
 .correct:before {

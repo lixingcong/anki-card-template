@@ -1,12 +1,18 @@
-<div class="wrap-container">
-    <div class="question">{{id}}.<span id="questionType"> </span>{{question}}</div>
-    <div class="options" id="options"></div>
-    <div id="tips"></div>
-    <hr>
+<div class="question">{{id}}.&nbsp;{{question}}<span id="questionType"></span></div>
+<div class="options" id="options"></div>
+<hr id="answer">
+<div class="tips">
+    <span class="compare-answer">
+        答案是<span id="correct-answer"></span>，你选了<span id="your-answer"></span>
+    </span>
+    {{#reference}}<span class="reference">{{reference}}</span>{{/reference}}
 </div>
 
-<div>{{notes}}</div>
-<div id="tag" class="tag"></div>
+{{#notes}}
+<span id="notes">{{notes}}</span>
+{{/notes}}
+
+<div id="tags" class="tags"></div>
 
 <script type="text/javascript">
     if (typeof (cs) == "undefined") {
@@ -25,5 +31,5 @@
     init_options(false);
     show_results();
     show_tags('{{Tags}}'.trim());
-    
+
 </script>
