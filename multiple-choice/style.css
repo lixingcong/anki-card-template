@@ -1,8 +1,0 @@
-.options{ list-style:upper-latin}
-.options *{ cursor:pointer;}
-.options *:hover{ font-weight:bold}
-
-.correct_answer {
-    color: white;
-    background-color: green;
-}
