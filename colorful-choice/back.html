@@ -1,0 +1,29 @@
+<div class="wrap-container">
+    <div class="question">{{id}}.<span id="questionType"> </span>{{question}}</div>
+    <div class="options" id="options"></div>
+    <div id="tips"></div>
+    <hr>
+</div>
+
+<div>{{notes}}</div>
+<div id="tag" class="tag"></div>
+
+<script type="text/javascript">
+    if (typeof (cs) == "undefined") {
+        var script = document.createElement('script');
+        script.innerHTML = "var cs;";
+        document.head.appendChild(script);
+    }
+
+    if (is_mobile && Persistence.isAvailable()) {
+        var csObject = Persistence.getItem();
+        cs = new CardStorage();
+        Object.assign(cs, csObject);
+        Persistence.clear();
+    }
+
+    init_options(false);
+    show_results();
+    show_tags('{{Tags}}'.trim());
+    
+</script>
