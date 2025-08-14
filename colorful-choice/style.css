@@ -3,8 +3,9 @@
     --green: #64ab07;
     --yellow: #c28d24;
 
-    --option-border: gray;
-    --tag-border: gray;
+    --option-border: #525252;
+    --tag-border: #525252;
+    --hr: #525252;
 
     --selected-prefix-text: white;
     --selected-prefix-bg:var(--correct-border);
@@ -82,11 +83,15 @@
     border: 1px solid var(--tag-border)
 }
 
+hr {
+    border-color: var(--hr);
+}
+
 .correct:before {
     content: '';
-    width: 1.5em;
+    width: 1.4em;
     height: 1.2em;
-	margin-left: 0.5em;
+    margin: 0 0.3em;
     background-repeat: no-repeat;
     vertical-align: sub;
     background-size: contain;
@@ -96,9 +101,9 @@
 
 .should-select:before {
     content: '';
-    width: 1.5em;
+    width: 1.4em;
     height: 1.2em;
-	margin-left: 0.5em;
+    margin: 0 0.3em;
     background-repeat: no-repeat;
     vertical-align: sub;
     background-size: contain;
@@ -108,9 +113,9 @@
 
 .wrong:before {
     content: '';
-    width: 1.5em;
+    width: 1.4em;
     height: 1.2em;
-	margin-left: 0.5em;
+    margin: 0 0.3em;
     background-repeat: no-repeat;
     vertical-align: sub;
     background-size: contain;
