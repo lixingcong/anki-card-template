@@ -1,12 +1,11 @@
 <div class="question">{{id}}.&nbsp;{{question}}<span id="questionType"></span></div>
 <div class="options" id="options"></div>
-<hr id="answer">
 <div class="tips">
-    <span class="compare-answer">
-        答案是<span id="correct-answer"></span>，你选了<span id="your-answer"></span>
-    </span>
+    答案是<span id="correct-answer"></span>，<span id="your-answer"></span>
     {{#reference}}<span class="reference">{{reference}}</span>{{/reference}}
 </div>
+
+<hr>
 
 {{#notes}}
 <span id="notes">{{notes}}</span>

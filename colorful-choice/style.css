@@ -81,17 +81,10 @@
 }
 
 hr {
-    border-color: var(--hr);
-}
-
-.tips {
-    display: block;
-    padding-bottom: 0.5em;
-    height: 1em;
-}
-
-.tips .compare-answer {
-    float: left;
+    border-color: transparent;
+    background-color: transparent;
+    border-top: 1px dashed var(--hr);
+    margin: 4px 0;
 }
 
 .tips .reference {

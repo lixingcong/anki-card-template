@@ -169,8 +169,10 @@ function show_results() {
         }
     }
 
-    document.getElementById('correct-answer').innerHTML = cs.correct_answers().join('')
-    document.getElementById('your-answer').innerHTML = cs.selected_answers().join('')
+    var ca = cs.correct_answers().join('')
+    var ya = cs.selected_answers().join('')
+    document.getElementById('correct-answer').innerHTML = ca
+    document.getElementById('your-answer').innerHTML = (ya == ca) ? '太棒了！': '你选了' + ya
 }
 
 function show_tags(tags){
