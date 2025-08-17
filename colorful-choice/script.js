@@ -1,5 +1,4 @@
 function CardStorage() {
-    this.options = []; // ['A. SelA','B. SelB','C. SelC']
     this.options_text = []; // ['SelA','SelB','SelC']
     this.options_prefix = []; // ['A','B','C']
 
@@ -12,21 +11,17 @@ function CardStorage() {
     this.selected = []; // [false, false, true, false] 给外界选中的，数组下标是映射后的
 
     this.build = function(options, answers){
-        this.options = options.split(/<br>/g).map(function (str) {
+        var options_splited = options.split(/<br>/g).map(function (str) {
             return str.trim();
         }).filter(function (str) {
             return str != "";
         });
 
-        this.options_text = this.options.map(function (str) {
+        this.options_text = options_splited.map(function (str) {
             return str.replace(/^[A-Za-z0-9][\.\|、\s]{1,}/i, "");
         });
 
-        this.selected = this.options.map(function () {
-            return false;
-        });
-
-        this.options_prefix = this.options.map(function (str) {
+        this.options_prefix = options_splited.map(function (str) {
             return str[0];  // 这里只取一个字符
         });
 
@@ -44,23 +39,11 @@ function CardStorage() {
         }
         this.single_choice = this.answer_idxes.length <= 1;
 
-        var shuffleIndex = this.options_prefix.length;
-        this.to_shuffled = Array.from(Array(shuffleIndex).keys());
-        this.from_shuffled = Array.from(Array(shuffleIndex).keys());
+        var shuffled = shuffle(this.options_prefix.length)
+        this.to_shuffled = shuffled[0]
+        this.from_shuffled = shuffled[1]
 
-        while (shuffleIndex > 0) {
-            var randomIndex = Math.floor(Math.random() * shuffleIndex);
-            --shuffleIndex;
-
-            // swap
-            var ref = [this.to_shuffled[randomIndex], this.to_shuffled[shuffleIndex]];
-            this.to_shuffled[shuffleIndex] = ref[0];
-            this.to_shuffled[randomIndex] = ref[1];
-
-            // build reverse
-            this.from_shuffled[ref[0]] = shuffleIndex;
-        }
-
+        this.reset_selected()
     }
 
     // 返回文本数组
@@ -76,7 +59,7 @@ function CardStorage() {
         var ok = 'ok';
         var ng = 'ng';
         var miss = 'miss';
-        var ret = this.options.map(function(){return undefined});
+        var ret = this.options_text.map(function(){return undefined});
 
         for(var i =0;i<ret.length;++i){
             var expect = this.answer_idxes.includes(this.from_shuffled[i])
@@ -108,7 +91,7 @@ function CardStorage() {
 
     // 重置选中
     this.reset_selected = function(){
-        this.selected = this.options.map(function () {
+        this.selected = this.options_text.map(function () {
             return false;
         });
     }
@@ -210,5 +193,29 @@ function from_option_id(str){
     return parseInt(str.slice(6));
 }
 
+function shuffle(count){
+    var a2b = Array.from(Array(count).keys())
+    var b2a = Array.from(Array(count).keys())
+    var i = count
+
+    while (i > 0) {
+        // random index
+        var r = Math.floor(Math.random() * i)
+        --i
+
+        if(r != i){
+            // swap
+            var x = a2b[i]
+            a2b[i] = a2b[r]
+            a2b[r] = x
+        }
+
+        // reverse table
+        b2a[a2b[i]] = i
+    }
+
+    return [a2b, b2a]
+}
+
 // for debug only
-module.exports ={CardStorage}
+module.exports ={CardStorage, shuffle}

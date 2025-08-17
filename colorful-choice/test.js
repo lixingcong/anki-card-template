@@ -5,6 +5,27 @@ const cs = new API.CardStorage()
 const options = 'A.第1项<br>B.第2项<br>C.第3项<br>D.第4项<br>E.第5项'
 
 if(1){
+    let counter = 10
+    while(counter--){
+        const count = 8
+        let a2b, b2a
+
+        [a2b, b2a] = API.shuffle(count)
+
+        let a = count
+        while(a--){
+            const b = a2b[a]
+            const A = b2a[b]
+
+            if(A !== a){
+                console.error('Failed: invalid bidirectional map: a2b=', a2b, 'b2a=', b2a)
+                process.exit(1)
+            }
+        }
+    }
+}
+
+if(1){
     cs.build(options, 'DC')
 
     console.log('多选，正确答案是第3,4项，构造函数', JSON.stringify(cs), '\n')
