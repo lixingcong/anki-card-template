@@ -9,6 +9,7 @@ function CardStorage() {
     this.single_choice = false; // 是否单选
 
     this.selected = []; // [false, false, true, false] 给外界选中的，数组下标是映射后的
+    this.indeterminate = false; // 不定项
 
     this.build = function(options, answers){
         var options_splited = options.split(/<br>/g).map(function (str) {
@@ -25,7 +26,16 @@ function CardStorage() {
             return str[0];  // 这里只取一个字符
         });
 
-        var answerArray = answers.split('').sort();
+        var answerArray = answers.split('')
+
+        if (answerArray.length > 0 && '?' == answerArray[0]) {
+            this.indeterminate = true;
+            answerArray.shift();
+        } else {
+            this.indeterminate = false;
+        }
+
+        answerArray.sort()
         this.answer_idxes = [];
         for(var option_idx = 0; option_idx<this.options_prefix.length;++option_idx){
             var option_prefix = this.options_prefix[option_idx];
@@ -119,7 +129,9 @@ function CardStorage() {
 }
 
 function init_options(bindClick) {
-    if(!cs.single_choice)
+    if(cs.indeterminate)
+        document.getElementById("questionType").innerText = '【不定项】'
+    else if(!cs.single_choice)
         document.getElementById("questionType").innerText = '【多选】'
 
     var options_div = document.getElementById("options");

@@ -87,3 +87,13 @@ if(1){
     console.log('答案：', cs.correct_answers(), '你的选择：', cs.selected_answers())
     console.log('-------------------------');
 }
+
+if(1){
+    cs.build(options, '?A')
+    console.log('单选，不定项，正确答案是第1项，构造函数', JSON.stringify(cs), '\n')
+    console.log('-------------------------')
+
+    cs.build(options, '?AB')
+    console.log('多选，不定项，正确答案是第1+2项，构造函数', JSON.stringify(cs), '\n')
+    console.log('-------------------------')
+}
