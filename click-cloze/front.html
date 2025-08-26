@@ -1,4 +1,4 @@
-<div id="content"></div>
+<div id="content-div"></div>
 
 {{#notes}}
 <hr>
@@ -14,7 +14,6 @@
     document.head.appendChild(script);
 
     cs.build('{{content}}'.trim());
-    console.log(cs);
 
     show_result(false);
     show_tags("{{Tags}}");

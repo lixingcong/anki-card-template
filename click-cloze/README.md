@@ -1,5 +1,7 @@
 # 说明
 
+一个简单的填空题模板，特点：点击后显示答案，再次点击隐藏答案。
+
 基于[Kevin-Anki-Templates](https://github.com/kevin2li/Kevin-Anki-Templates)的填空题JS逻辑修改
 
 卡片字段

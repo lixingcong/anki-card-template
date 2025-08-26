@@ -4,7 +4,7 @@
 
 :root{
     --tag-border: #525252;
-    --cloze-underline: #525252;
+    --cloze-underline: #6f6f6f;
     --hr: #525252;
     --show-notes-btn: #525252;
 }
@@ -32,8 +32,14 @@ hr {
     color: var(--show-notes-btn);
 }
 
-.cloze-hide{
+.cloze-show {
+    cursor: pointer;
+}
+
+.cloze-hide {
     color: var(--cloze-underline);
     margin:0 0.1em;
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
 }

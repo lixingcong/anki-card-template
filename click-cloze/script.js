@@ -30,23 +30,33 @@ function CardStorage() {
 }
 
 function show_result(always) {
-    var div = document.getElementById('content')
+    var div = document.getElementById('content-div') // 在Android上用content作为id会同名冲突，因此加上div后缀
+    var hiddenClass = 'cloze-hide'
+    var showClass = 'cloze-show'
+    var answerAttribute = 'answer'
+    var spaces = '&nbsp;'.repeat(25) // 这个重复字符总宽度，适合手指点击
+
     for (var r of cs.results) {
         if (always || !r.hidden) {
             div.innerHTML += r.text
         } else {
-            var span = document.createElement("span")
-            span.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-            span.className = 'cloze-hide'
-            span.setAttribute('answer', r.text)
+            var span = document.createElement('span')
+            span.innerHTML = spaces
+            span.className = hiddenClass
+            span.setAttribute(answerAttribute, r.text)
             div.appendChild(span)
         }
     }
 
-    document.querySelectorAll(".cloze-hide").forEach(function (ele) {
-        ele.onclick = function () {
-            ele.innerHTML = ele.getAttribute('answer')
-            ele.className = 'cloze-show'
+    document.querySelectorAll('.' + hiddenClass).forEach(function (e) {
+        e.onclick = function () {
+            if (-1 != e.className.indexOf(hiddenClass)) {
+                e.innerHTML = e.getAttribute(answerAttribute)
+                e.className = showClass
+            } else {
+                e.innerHTML = spaces
+                e.className = hiddenClass
+            }
         }
     });
 }
