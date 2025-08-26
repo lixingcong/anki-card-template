@@ -1,0 +1,39 @@
+.card {
+    font-size: 1.3em;
+}
+
+:root{
+    --tag-border: #525252;
+    --cloze-underline: #525252;
+    --hr: #525252;
+    --show-notes-btn: #525252;
+}
+
+.tags{
+    text-align: right;
+}
+
+.tag {
+    margin-left: 0.1em;
+    padding: 0em 0.3em;
+    border-radius: 5px;
+    border: 1px solid var(--tag-border)
+}
+
+hr {
+    border-color: transparent;
+    background-color: transparent;
+    border-top: 1px dashed var(--hr);
+    margin: 4px 0;
+}
+
+.show-notes-btn {
+    list-style: none;
+    color: var(--show-notes-btn);
+}
+
+.cloze-hide{
+    color: var(--cloze-underline);
+    margin:0 0.1em;
+    text-decoration: underline;
+}

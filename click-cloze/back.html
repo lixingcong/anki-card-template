@@ -1,0 +1,27 @@
+<div id="content"></div>
+
+{{#notes}}
+<hr>
+<span id="notes">{{notes}}</span>
+{{/notes}}
+
+<div id="tags" class="tags"></div>
+
+<script type="text/javascript">
+    if (typeof (cs) == "undefined") {
+        var script = document.createElement('script');
+        script.innerHTML = "var cs;";
+        document.head.appendChild(script);
+    }
+
+    if (is_mobile && Persistence.isAvailable()) {
+        var csObject = Persistence.getItem();
+        cs = new CardStorage();
+        Object.assign(cs, csObject);
+        Persistence.clear();
+    }
+
+    show_result(true);
+    show_tags('{{Tags}}'.trim());
+
+</script>

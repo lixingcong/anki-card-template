@@ -1,0 +1,33 @@
+<div id="content"></div>
+
+{{#notes}}
+<hr>
+<div><li onclick="showNotes(this)" class="show-notes-btn">⊙</li></div>
+<span id="notes" style="display: none">{{notes}}</span>
+{{/notes}}
+
+<div id="tags" class="tags"></div>
+
+<script type="text/javascript">
+    var script = document.createElement('script');
+    script.innerHTML = "var cs = new CardStorage();";
+    document.head.appendChild(script);
+
+    cs.build('{{content}}'.trim());
+    console.log(cs);
+
+    show_result(false);
+    show_tags('{{Tags}}'.trim());
+
+    if(is_mobile){
+        window.onunload = function() {
+            if (Persistence.isAvailable())
+                Persistence.setItem(cs);
+        };
+    }
+
+    function showNotes(li){
+        document.getElementById('notes').style.display = 'block'
+        li.remove()
+    }
+</script>

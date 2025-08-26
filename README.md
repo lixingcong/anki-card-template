@@ -2,6 +2,14 @@
 
 利用持续存储，传递数据，从正面卡片到背面。
 
+# 编译
+
+```bash
+bash release.sh FOLDER
+```
+
+FOLDER的值，就是文件夹名字，如`colorful-choice`。编译结果输出到`/tmp/FOLDER`
+
 # 样式表和JS代码合并成一份
 
 为了复用js代码，可以将css和js同时写入一份。只需在Anki编辑器中央插入`</style><script>`，末尾加上`</script>`即可，如：
