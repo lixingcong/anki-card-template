@@ -58,7 +58,7 @@ function show_result(always) {
                 e.className = hiddenClass
             }
         }
-    });
+    })
 }
 
 function show_tags(tags){

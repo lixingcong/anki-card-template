@@ -15,20 +15,20 @@
 
 <script type="text/javascript">
     if (typeof (cs) == "undefined") {
-        var script = document.createElement('script');
-        script.innerHTML = "var cs;";
-        document.head.appendChild(script);
+        var script = document.createElement('script')
+        script.innerHTML = "var cs;"
+        document.head.appendChild(script)
     }
 
     if (is_mobile && Persistence.isAvailable()) {
-        var csObject = Persistence.getItem();
-        cs = new CardStorage();
-        Object.assign(cs, csObject);
-        Persistence.clear();
+        var csObject = Persistence.getItem()
+        cs = new CardStorage()
+        Object.assign(cs, csObject)
+        Persistence.clear()
     }
 
-    init_options(false);
-    show_results();
-    show_tags("{{Tags}}");
+    init_options(false)
+    show_results()
+    show_tags("{{Tags}}")
 
 </script>

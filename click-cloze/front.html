@@ -9,20 +9,20 @@
 <div id="tags" class="tags"></div>
 
 <script type="text/javascript">
-    var script = document.createElement('script');
-    script.innerHTML = "var cs = new CardStorage();";
-    document.head.appendChild(script);
+    var script = document.createElement('script')
+    script.innerHTML = "var cs = new CardStorage();"
+    document.head.appendChild(script)
 
-    cs.build('{{content}}'.trim());
+    cs.build('{{content}}'.trim())
 
-    show_result(false);
-    show_tags("{{Tags}}");
+    show_result(false)
+    show_tags("{{Tags}}")
 
     if(is_mobile){
         window.onunload = function() {
             if (Persistence.isAvailable())
-                Persistence.setItem(cs);
-        };
+                Persistence.setItem(cs)
+        }
     }
 
     function showNotes(li){
