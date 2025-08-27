@@ -134,24 +134,28 @@ function init_options(bindClick) {
     else if(!cs.single_choice)
         document.getElementById("questionType").innerText = '【多选】'
 
-    var options_div = document.getElementById("options");
-    var options = cs.shuffled_options()
+    var div = document.getElementById("options");
+    var optionClass = 'option'
 
-    var template = bindClick ?
-        "<li id='$id' class='option' onclick='toggle(this)'>$option</li>":
-        "<li id='$id' class='option'>$option</li>";
-
-    options.forEach(function (option,idx) {
-        options_div.innerHTML += template
-            .replace("$option", option)
-            .replace('$id', to_option_id(idx));
+    cs.shuffled_options().forEach(function (option, idx) {
+        var li = document.createElement('li')
+        li.className = optionClass
+        li.innerHTML = option
+        li.id = to_option_id(idx)
+        div.appendChild(li)
     });
+
+    if(bindClick){
+        document.querySelectorAll('.' + optionClass).forEach(function (e) {
+            e.onclick = function(){toggle(e)}
+        });
+    }
 }
 
 function toggle(li) {
     var selectedKey = 'selected';
     var this_idx = from_option_id(li.id)
-    var oldState = li.className.indexOf(selectedKey) > 0;
+    var oldState = li.className.indexOf(selectedKey) >= 0;
 
     // set to model
     cs.toggle(this_idx, !oldState);
@@ -189,13 +193,14 @@ function show_results() {
 
 function show_tags(tags){
     if (tags){
-        tags = tags.split(' ')
-        var tagList = ''
-        for (var tag of tags) {
-            if (tag)
-                tagList += '<span class="tag">' + tag + '</span>'
+        div = document.getElementById("tags")
+        splited = tags.split(' ')
+        for (var tag of splited) {
+            var span = document.createElement('span')
+            span.className = 'tag'
+            span.innerText = tag
+            div.appendChild(span)
         }
-        document.getElementById("tags").innerHTML = tagList
     }
 }
 

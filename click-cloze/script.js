@@ -50,7 +50,7 @@ function show_result(always) {
 
     document.querySelectorAll('.' + hiddenClass).forEach(function (e) {
         e.onclick = function () {
-            if (-1 != e.className.indexOf(hiddenClass)) {
+            if (e.className.indexOf(hiddenClass) >= 0) {
                 e.innerHTML = e.getAttribute(answerAttribute)
                 e.className = showClass
             } else {
@@ -61,15 +61,16 @@ function show_result(always) {
     });
 }
 
-function show_tags(tags) {
-    if (tags) {
-        tags = tags.split(' ')
-        var tagList = ''
-        for (var tag of tags) {
-            if (tag)
-                tagList += '<span class="tag">' + tag + '</span>'
+function show_tags(tags){
+    if (tags){
+        div = document.getElementById("tags")
+        splited = tags.split(' ')
+        for (var tag of splited) {
+            var span = document.createElement('span')
+            span.className = 'tag'
+            span.innerText = tag
+            div.appendChild(span)
         }
-        document.getElementById("tags").innerHTML = tagList
     }
 }
 
