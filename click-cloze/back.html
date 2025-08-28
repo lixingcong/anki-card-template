@@ -11,19 +11,23 @@
 
 <script type="text/javascript">
     if (typeof (cs) == "undefined") {
-        var script = document.createElement('script')
-        script.innerHTML = "var cs;"
+        const script = document.createElement('script')
+        script.innerHTML = "var cs = new CardStorage();"
         document.head.appendChild(script)
     }
 
     if (is_mobile && Persistence.isAvailable()) {
-        var csObject = Persistence.getItem()
-        cs = new CardStorage()
+        const csObject = Persistence.getItem()
         Object.assign(cs, csObject)
         Persistence.clear()
     }
 
     show_result(true)
     show_tags(takeContent('original-tags'), 'tags', 'tag')
+
+    if(undefined !== keyChecker){
+        keyChecker.uninstall()
+        keyChecker = undefined
+    }
 
 </script>

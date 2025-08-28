@@ -12,9 +12,11 @@
 <code class="invisible" id="original-tags">{{Tags}}</code>
 
 <script type="text/javascript">
-    var script = document.createElement('script')
-    script.innerHTML = "var cs = new CardStorage();"
-    document.head.appendChild(script)
+    if (typeof (cs) == "undefined") {
+        const script = document.createElement('script')
+        script.innerHTML = "var cs = new CardStorage();"
+        document.head.appendChild(script)
+    }
 
     cs.build(takeContent('original-content'))
 
@@ -39,7 +41,7 @@
     var keyChecker= new EventHistoryTimer('keydown', 60)
     keyChecker.install(function(e){
         if(e.ctrlKey && e.altKey){
-            var show = undefined
+            let show
             if(49==e.keyCode)
                 show = true
             else if(50==e.keyCode)

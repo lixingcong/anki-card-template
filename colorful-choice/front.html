@@ -12,9 +12,11 @@
 <code class="invisible" id="original-tags">{{Tags}}</code>
 
 <script type="text/javascript">
-    var script = document.createElement('script')
-    script.innerHTML = "var cs = new CardStorage();"
-    document.head.appendChild(script)
+    if (typeof (cs) == "undefined") {
+        var script = document.createElement('script')
+        script.innerHTML = "var cs = new CardStorage();"
+        document.head.appendChild(script)
+    }
 
     cs.build(takeContent('original-options'), '{{answer}}'.trim())
 

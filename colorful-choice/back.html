@@ -18,13 +18,12 @@
 <script type="text/javascript">
     if (typeof (cs) == "undefined") {
         var script = document.createElement('script')
-        script.innerHTML = "var cs;"
+        script.innerHTML = "var cs = new CardStorage();"
         document.head.appendChild(script)
     }
 
     if (is_mobile && Persistence.isAvailable()) {
         var csObject = Persistence.getItem()
-        cs = new CardStorage()
         Object.assign(cs, csObject)
         Persistence.clear()
     }
@@ -32,5 +31,10 @@
     init_options(false)
     show_results()
     show_tags(takeContent('original-tags'), 'tags', 'tag')
+
+    if(undefined !== keyChecker){
+        keyChecker.uninstall()
+        keyChecker = undefined
+    }
 
 </script>

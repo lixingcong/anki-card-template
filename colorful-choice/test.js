@@ -2,7 +2,7 @@ const API = require('./script.js')
 
 const cs = new API.CardStorage()
 
-const options = 'A.第1项<br>B.第2项<br>C.第3项<br>D.第4项<br>E.第5项'
+const options = 'A.第1项<br>B. 第2项<br>C、第3项<br>D 第4项<br>e.第5项'
 
 if(1){
     let counter = 10

@@ -47,6 +47,12 @@ export QTWEBENGINE_REMOTE_DEBUGGING=8080
 
 # 其它笔记
 
+## 关于ES6
+
+Anki是支持的，但是css和js合并成一个文件了，每次都加载一遍script，会在控制台中打印很多`already declare`的错误。
+
+用传统的javascript就不会有错误提示。
+
 ## 判断平台并显示答案
 
 ```javascript
