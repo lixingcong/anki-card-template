@@ -141,20 +141,20 @@ function init_options(bindClick) {
         var li = document.createElement('li')
         li.className = optionClass
         li.innerHTML = option
-        li.id = to_option_id(idx)
+        li.id = index_to_id(idx)
         div.appendChild(li)
     })
 
     if(bindClick){
         document.querySelectorAll('.' + optionClass).forEach(function (e) {
-            e.onclick = function(){toggle(from_option_id(e.id))}
+            e.onclick = function(){toggle(id_to_index(e.id))}
         })
     }
 }
 
 function toggle(option_idx) {
     var selectedKey = 'selected'
-    var li = document.getElementById(to_option_id(option_idx))
+    var li = document.getElementById(index_to_id(option_idx))
     var oldState = li.className.indexOf(selectedKey) >= 0
 
     // set to model
@@ -163,7 +163,7 @@ function toggle(option_idx) {
     // redraw
     for(var idx =0;idx<cs.selected.length;++idx){
         var newClass = cs.selected[idx] ? 'option ' + selectedKey : 'option'
-        document.getElementById(to_option_id(idx)).className = newClass
+        document.getElementById(index_to_id(idx)).className = newClass
     }
 }
 
@@ -181,7 +181,7 @@ function show_results() {
                 newClass = 'should-select'
 
             if(newClass)
-                document.getElementById(to_option_id(idx)).className = 'option '+ newClass
+                document.getElementById(index_to_id(idx)).className = 'option '+ newClass
         }
     }
 
@@ -189,27 +189,6 @@ function show_results() {
     var ya = cs.selected_answers().join('')
     document.getElementById('correct-answer').innerHTML = ca
     document.getElementById('your-answer').innerHTML = (ya == ca) ? '太棒了！': '你选了' + ya
-}
-
-function show_tags(tags){
-    if (tags){
-        div = document.getElementById("tags")
-        splited = tags.split(' ')
-        for (var tag of splited) {
-            var span = document.createElement('span')
-            span.className = 'tag'
-            span.innerText = tag
-            div.appendChild(span)
-        }
-    }
-}
-
-function to_option_id(idx){
-    return "index_" + idx
-}
-
-function from_option_id(str){
-    return parseInt(str.slice(6))
 }
 
 function shuffle(count){

@@ -49,7 +49,7 @@ function show_result(always) {
             div.innerHTML += r.text
         } else {
             var span = document.createElement('span')
-            span.id = to_cloze_id(clickClozeCount)
+            span.id = index_to_id(clickClozeCount)
             span.innerHTML = Spaces
             span.className = HiddenClass
             span.setAttribute(Answer, r.text)
@@ -61,13 +61,13 @@ function show_result(always) {
 
     document.querySelectorAll('.' + HiddenClass).forEach(function (span) {
         span.onclick = function () {
-            showClozeAnswer(from_cloze_id(span.id), undefined)
+            showClozeAnswer(id_to_index(span.id), undefined)
         }
     })
 }
 
 function clozeAnswerHidden(idx){
-    var span = document.getElementById(to_cloze_id(idx))
+    var span = document.getElementById(index_to_id(idx))
     return span.className.indexOf(HiddenClass) >= 0
 }
 
@@ -75,7 +75,7 @@ function clozeAnswerHidden(idx){
 function showClozeAnswer(idx, show){
     ClickedClozeIndex = idx
 
-    var span = document.getElementById(to_cloze_id(idx))
+    var span = document.getElementById(index_to_id(idx))
     var hidden = span.className.indexOf(HiddenClass) >= 0
 
     if (undefined === show)
@@ -99,37 +99,6 @@ function showClozeAnswerByStep(show){
 
     if(idx >= 0 && idx < cs.clickClozeCount)
         showClozeAnswer(idx, show)
-}
-
-function show_tags(tags){
-    if (tags){
-        div = document.getElementById("tags")
-        splited = tags.split(' ')
-        for (var tag of splited) {
-            var span = document.createElement('span')
-            span.className = 'tag'
-            span.innerText = tag
-            div.appendChild(span)
-        }
-    }
-}
-
-function to_cloze_id(idx){
-    return "index_" + idx
-}
-
-function from_cloze_id(str){
-    return parseInt(str.slice(6))
-}
-
-// 查找id并返回该html内容，然后移除该元素
-function takeContent(id) {
-    var e = document.getElementById(id)
-    if (e) {
-        e.remove()
-        return e.innerHTML
-    }
-    return ''
 }
 
 // for debug only

@@ -15,11 +15,15 @@ OUTPUT_DIR=/tmp/$INPUT_DIR
 rm -rf $OUTPUT_DIR
 mkdir $OUTPUT_DIR
 
+COMMON_DIR=common
+
 IN_FRONT=$INPUT_DIR/front.html
 IN_BACK=$INPUT_DIR/back.html
 IN_STYLE=$INPUT_DIR/style.css
 IN_SCRIPT=$INPUT_DIR/script.js
-IN_PERSISTENCE=anki-persistence.js
+IN_PERSISTENCE=$COMMON_DIR/anki-persistence.js
+IN_COMMON_UTILS=$COMMON_DIR/utils.js
+IN_COMMON_STYLE=$COMMON_DIR/style.css
 
 OUT_FRONT=$OUTPUT_DIR/front.html
 OUT_BACK=$OUTPUT_DIR/back.html
@@ -30,6 +34,9 @@ cp $IN_BACK $OUT_BACK
 
 # 移除 /* 注释 */
 sed $IN_STYLE -e '\|^\s*/\*.*\*/$|d' >> $OUT_STYLE
+echo "" >> $OUT_STYLE
+sed $IN_COMMON_STYLE -e '\|^\s*/\*.*\*/$|d' >> $OUT_STYLE
+echo "" >> $OUT_STYLE
 
 cat << EOF >> $OUT_STYLE
 
@@ -44,6 +51,10 @@ echo "" >> $OUT_STYLE
 
 # 移除 // 注释 和导出语句
 sed $IN_SCRIPT -e 's#//.*$##' -e '/^module.exports/d' >> $OUT_STYLE
+echo "" >> $OUT_STYLE
+
+# 移除 // 注释 和导出语句
+sed $IN_COMMON_UTILS -e 's#//.*$##' -e '/^module.exports/d' >> $OUT_STYLE
 echo "" >> $OUT_STYLE
 
 echo "</script>" >> $OUT_STYLE

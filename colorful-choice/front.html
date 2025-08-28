@@ -8,15 +8,18 @@
 
 <div id="tags" class="tags"></div>
 
+<code class="invisible" id="original-options">{{options}}</code>
+<code class="invisible" id="original-tags">{{Tags}}</code>
+
 <script type="text/javascript">
     var script = document.createElement('script')
     script.innerHTML = "var cs = new CardStorage();"
     document.head.appendChild(script)
 
-    cs.build('{{options}}'.trim(), '{{answer}}'.trim())
+    cs.build(takeContent('original-options'), '{{answer}}'.trim())
 
     init_options(true)
-    show_tags("{{Tags}}")
+    show_tags(takeContent('original-tags'), 'tags', 'tag')
 
     if(is_mobile){
         window.onunload = function() {
@@ -30,9 +33,13 @@
         li.remove()
     }
 
-    document.addEventListener('keyup', function (event) {
-        if(event.ctrlKey && event.altKey){
-            var idx = event.keyCode - 49
+    if(undefined !== keyChecker)
+        keyChecker.uninstall()
+
+    var keyChecker= new EventHistoryTimer('keydown', 60)
+    keyChecker.install(function(e){
+        if(e.ctrlKey && e.altKey){
+            var idx = e.keyCode - 49
             if(idx>=0 && idx<cs.options_text.length)
                 toggle(idx)
         }
