@@ -2,7 +2,7 @@ const API = require('./script.js')
 
 const cs = new API.CardStorage()
 
-const options = 'A.第1项<br>B. 第2项<br>C、第3项<br>D 第4项<br>e.第5项'
+const options = 'A.第1项<br>B.    第2项<br>C、第3项<br>D 第4项<br>E.第5项'
 
 if(1){
     let counter = 10
@@ -23,6 +23,22 @@ if(1){
             }
         }
     }
+}
+
+if(1){
+    const specialOptions='x.陨石<br>y.房子<br>z.天空<br>4.月亮<br>@.猴子<br>6.蜻蜓<br>7.手机<br>8.苹果<br>9.乡村'
+    cs.build(specialOptions, 'zy')
+    console.log('多选，正确答案是房子和天空，构造函数', JSON.stringify(cs), '\n')
+    console.log('随机后', JSON.stringify(cs.shuffled_options()), '\n')
+    console.log('没有选中，交卷', JSON.stringify(cs.commit()))
+
+    cs.toggle(0, true)
+    console.log('选中第一项，交卷', JSON.stringify(cs.commit()))
+
+    cs.toggle(1, true)
+    console.log('选中第二项，交卷', JSON.stringify(cs.commit()))
+    console.log('答案：', cs.correct_answers(), '你的选择：', cs.selected_answers())
+    console.log('-------------------------')
 }
 
 if(1){

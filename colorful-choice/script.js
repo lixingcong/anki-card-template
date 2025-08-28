@@ -13,11 +13,10 @@ function CardStorage() {
 
     this.build = function(options, answers){
         const options_splited = options.split(/<br>/g).map(s => s.trim()).filter(s => s.length>0)
-        this.options_text = options_splited.map(s => s.replace(/^[A-Z0-9][\.\|、\s]{1,}/i, ''))
-        this.options_prefix = options_splited.map(s => s[0].toUpperCase()) // 这里只取一个字符
+        this.options_text = options_splited.map(s => s.replace(/^[\x00-\x7F][\.\|、\s]{1,}/i, ''))
+        this.options_prefix = options_splited.map(s => s[0]) // 这里只取一个字符
 
-        const answerArray = answers.toUpperCase().split('')
-
+        const answerArray = answers.split('')
         if (answerArray.length > 0 && '?' == answerArray[0]) {
             this.indeterminate = true
             answerArray.shift()
@@ -25,18 +24,21 @@ function CardStorage() {
             this.indeterminate = false
         }
 
-        answerArray.sort()
         this.answer_idxes = []
         for(let i = 0; i<this.options_prefix.length;++i){
             const option_prefix = this.options_prefix[i]
 
             for(let j =0; j<answerArray.length;++j){
-                if(answerArray[j] == option_prefix){
+                if(answerArray[j] == option_prefix){ // found correct answer index
                     this.answer_idxes.push(i)
                     break
                 }
             }
         }
+        this.answer_idxes.sort()
+
+        this.options_prefix = this.options_prefix.map((_, idx) => String.fromCharCode(idx + 65)) // map to A...
+
         this.single_choice = this.answer_idxes.length <= 1
 
         const shuffled = shuffle(this.options_prefix.length)
