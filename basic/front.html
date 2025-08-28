@@ -1,0 +1,19 @@
+{{Front}}
+
+{{#Reference}}
+<div><li onclick="showNotes(this)" class="show-notes-btn">⊙</li></div>
+<div id="notes" class="invisible">{{Reference}}</div>
+{{/Reference}}
+
+<div id="tags" class="tags"></div>
+
+<code class="invisible" id="original-tags">{{Tags}}</code>
+
+<script type="text/javascript">
+    show_tags(takeContent('original-tags'), 'tags', 'tag')
+
+    function showNotes(li){
+        document.getElementById('notes').className='reference'
+        li.remove()
+    }
+</script>

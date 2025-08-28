@@ -33,8 +33,11 @@ cp $IN_FRONT $OUT_FRONT
 cp $IN_BACK $OUT_BACK
 
 # 移除 /* 注释 */
-sed $IN_STYLE -e '\|^\s*/\*.*\*/$|d' >> $OUT_STYLE
-echo "" >> $OUT_STYLE
+if [ -f $IN_STYLE ]; then
+    sed $IN_STYLE -e '\|^\s*/\*.*\*/$|d' >> $OUT_STYLE
+    echo "" >> $OUT_STYLE
+fi
+
 sed $IN_COMMON_STYLE -e '\|^\s*/\*.*\*/$|d' >> $OUT_STYLE
 echo "" >> $OUT_STYLE
 
@@ -50,8 +53,10 @@ sed $IN_PERSISTENCE -e 's#//.*$##' >> $OUT_STYLE
 echo "" >> $OUT_STYLE
 
 # 移除 // 注释 和导出语句
-sed $IN_SCRIPT -e 's#//.*$##' -e '/^module.exports/d' >> $OUT_STYLE
-echo "" >> $OUT_STYLE
+if [ -f $IN_SCRIPT ]; then
+    sed $IN_SCRIPT -e 's#//.*$##' -e '/^module.exports/d' >> $OUT_STYLE
+    echo "" >> $OUT_STYLE
+fi
 
 # 移除 // 注释 和导出语句
 sed $IN_COMMON_UTILS -e 's#//.*$##' -e '/^module.exports/d' >> $OUT_STYLE

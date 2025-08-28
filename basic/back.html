@@ -1,0 +1,15 @@
+{{Front}}
+<hr>
+{{Back}}
+
+{{#Reference}}
+<div class="reference">{{Reference}}</div>
+{{/Reference}}
+
+<div id="tags" class="tags"></div>
+
+<code class="invisible" id="original-tags">{{Tags}}</code>
+
+<script type="text/javascript">
+    show_tags(takeContent('original-tags'), 'tags', 'tag')
+</script>
