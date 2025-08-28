@@ -29,4 +29,12 @@
         document.getElementById('notes').style.display = 'block'
         li.remove()
     }
+
+    document.addEventListener('keyup', function (event) {
+        if(event.ctrlKey && event.altKey){
+            var idx = event.keyCode - 49
+            if(idx>=0 && idx<cs.options_text.length)
+                toggle(idx)
+        }
+    })
 </script>

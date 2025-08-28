@@ -147,18 +147,18 @@ function init_options(bindClick) {
 
     if(bindClick){
         document.querySelectorAll('.' + optionClass).forEach(function (e) {
-            e.onclick = function(){toggle(e)}
+            e.onclick = function(){toggle(from_option_id(e.id))}
         })
     }
 }
 
-function toggle(li) {
+function toggle(option_idx) {
     var selectedKey = 'selected'
-    var this_idx = from_option_id(li.id)
+    var li = document.getElementById(to_option_id(option_idx))
     var oldState = li.className.indexOf(selectedKey) >= 0
 
     // set to model
-    cs.toggle(this_idx, !oldState)
+    cs.toggle(option_idx, !oldState)
 
     // redraw
     for(var idx =0;idx<cs.selected.length;++idx){

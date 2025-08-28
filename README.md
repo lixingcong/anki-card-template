@@ -45,7 +45,7 @@ export QTWEBENGINE_REMOTE_DEBUGGING=8080
 - Android系统中开启USB调试
 - 使用Chrome浏览器打开`chrome://inspect`
 
-# 其它API
+# 其它笔记
 
 ## 判断平台并显示答案
 
@@ -61,3 +61,17 @@ function flipToBack() {
         window.sendMessage2("ankitap", "midCenter")
 }
 ```
+
+## 绑定按键事件
+
+注意front.html中绑定一个keyup事件，编辑卡片时，会再次绑定，导致重复触发。解决：使用定时器（类似`QTimer::singleShot`实现）
+
+## 传给js的字符串有转义
+
+考察以下代码
+
+```javascript
+cs.build('{{Question}}')
+```
+
+如果Question字段含有特殊字符，比如双引号，会导致解析异常。解决：将Question字段放入HTML标记块`<code>`中，然后动态取出

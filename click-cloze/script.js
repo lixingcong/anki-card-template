@@ -1,7 +1,10 @@
 function CardStorage() {
     this.results = []
+    this.clickClozeCount = 0 // 可以点击的个数
 
     this.build = function (text) {
+        this.clickClozeCount = 0
+
         var R = /\[{2}(.*?)\]{2}/gm
         var matches
         var lastPos = 0
@@ -15,6 +18,7 @@ function CardStorage() {
             if (startPos > lastPos)
                 this.appendResult(false, text.slice(lastPos, startPos))
 
+            ++this.clickClozeCount
             this.appendResult(true, answer)
 
             lastPos = startPos + length
@@ -29,36 +33,72 @@ function CardStorage() {
     }
 }
 
+var HiddenClass = 'cloze-hide'
+var ShowClass = 'cloze-show'
+var Answer = 'answer'
+var Spaces = '&nbsp;'.repeat(25) // 这个重复字符总宽度，适合手指点击
+var ClickedClozeIndex = 0 // 揭开过cloze答案的序号
+
 function show_result(always) {
     var div = document.getElementById('content-div') // 在Android上用content作为id会同名冲突，因此加上div后缀
-    var hiddenClass = 'cloze-hide'
-    var showClass = 'cloze-show'
-    var answerAttribute = 'answer'
-    var spaces = '&nbsp;'.repeat(25) // 这个重复字符总宽度，适合手指点击
+    ClickedClozeIndex = 0
+    var clickClozeCount = 0
 
     for (var r of cs.results) {
         if (always || !r.hidden) {
             div.innerHTML += r.text
         } else {
             var span = document.createElement('span')
-            span.innerHTML = spaces
-            span.className = hiddenClass
-            span.setAttribute(answerAttribute, r.text)
+            span.id = to_cloze_id(clickClozeCount)
+            span.innerHTML = Spaces
+            span.className = HiddenClass
+            span.setAttribute(Answer, r.text)
             div.appendChild(span)
+
+            ++clickClozeCount
         }
     }
 
-    document.querySelectorAll('.' + hiddenClass).forEach(function (e) {
-        e.onclick = function () {
-            if (e.className.indexOf(hiddenClass) >= 0) {
-                e.innerHTML = e.getAttribute(answerAttribute)
-                e.className = showClass
-            } else {
-                e.innerHTML = spaces
-                e.className = hiddenClass
-            }
+    document.querySelectorAll('.' + HiddenClass).forEach(function (span) {
+        span.onclick = function () {
+            showClozeAnswer(from_cloze_id(span.id), undefined)
         }
     })
+}
+
+function clozeAnswerHidden(idx){
+    var span = document.getElementById(to_cloze_id(idx))
+    return span.className.indexOf(HiddenClass) >= 0
+}
+
+// 参数show可能的值：undefined, true, false
+function showClozeAnswer(idx, show){
+    ClickedClozeIndex = idx
+
+    var span = document.getElementById(to_cloze_id(idx))
+    var hidden = span.className.indexOf(HiddenClass) >= 0
+
+    if (undefined === show)
+        show = hidden; // toggle
+
+    if (show) {
+        span.innerHTML = span.getAttribute(Answer)
+        span.className = ShowClass
+    } else {
+        span.innerHTML = Spaces
+        span.className = HiddenClass
+    }
+}
+
+// 用键盘控制的显示和隐藏cloze答案，参数show: true/false
+function showClozeAnswerByStep(show){
+    var idx = ClickedClozeIndex
+    var currentShow = !clozeAnswerHidden(idx)
+    if(currentShow == show)
+        idx += (show ? 1 : -1) // next or prev
+
+    if(idx >= 0 && idx < cs.clickClozeCount)
+        showClozeAnswer(idx, show)
 }
 
 function show_tags(tags){
@@ -72,6 +112,24 @@ function show_tags(tags){
             div.appendChild(span)
         }
     }
+}
+
+function to_cloze_id(idx){
+    return "index_" + idx
+}
+
+function from_cloze_id(str){
+    return parseInt(str.slice(6))
+}
+
+// 查找id并返回该html内容，然后移除该元素
+function takeContent(id) {
+    var e = document.getElementById(id)
+    if (e) {
+        e.remove()
+        return e.innerHTML
+    }
+    return ''
 }
 
 // for debug only

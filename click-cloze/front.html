@@ -8,12 +8,14 @@
 
 <div id="tags" class="tags"></div>
 
+<code class="invisible" id="original-content">{{content}}</code>
+
 <script type="text/javascript">
     var script = document.createElement('script')
     script.innerHTML = "var cs = new CardStorage();"
     document.head.appendChild(script)
 
-    cs.build('{{content}}'.trim())
+    cs.build(takeContent('original-content'))
 
     show_result(false)
     show_tags("{{Tags}}")
@@ -29,4 +31,36 @@
         document.getElementById('notes').style.display = 'block'
         li.remove()
     }
+
+    var keyPressTimer = undefined
+    var keyPressHistory = []
+
+    function keyPressTimeout(){
+        for(var e of keyPressHistory){
+            if(e.ctrlKey && e.altKey){
+                var show = undefined
+                if(49==e.keyCode)
+                    show = true
+                else if(50==e.keyCode)
+                    show = false
+
+                if(undefined !== show){
+                    showClozeAnswerByStep(show)
+                    break
+                }
+            }
+        }
+
+        keyPressTimer = undefined
+        keyPressHistory.length = 0
+        document.addEventListener('keydown', keyPressHandler, {once: true})
+    }
+
+    function keyPressHandler(event) {
+        keyPressHistory.unshift(event)
+        if (undefined === keyPressTimer)
+            keyPressTimer = setTimeout(keyPressTimeout, 10, event)
+    }
+
+    keyPressTimeout()
 </script>
