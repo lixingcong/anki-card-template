@@ -1,0 +1,60 @@
+.card {
+    font-size: 1.3em;
+}
+
+:root {
+    --tag-border: #525252;
+    --image-border: #525252;
+    --show-notes-btn: #525252;
+}
+
+.tags {
+    text-align: right;
+}
+
+.tag {
+    margin-left: 0.1em;
+    padding: 0em 0.3em;
+    border-radius: 5px;
+    border: 1px solid var(--tag-border)
+}
+
+.show-notes-btn {
+    list-style: none;
+    color: var(--show-notes-btn);
+}
+
+.div-outside {
+    width: 100%;
+    height: 10em;
+    min-height: 2em;
+    resize: vertical;
+    border: 1px dashed var(--image-border);
+    overflow: auto;
+}
+
+.div-inside {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.covered-image {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+}
+
+.covering-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    /* background-color: rgba(255, 0, 0, .1); */
+    z-index: 2;
+}

@@ -1,0 +1,46 @@
+<div>{{title}}</div>
+<div class="div-outside" id="div-outside">
+    <div class="div-inside">
+        <img id="image" class="covered-image" src="{{image}}"></img>
+        <canvas id="canvas" class="covering-canvas"></canvas>
+    </div>
+</div>
+
+{{#notes}}
+<span id="notes">{{notes}}</span>
+{{/notes}}
+
+<div id="tags" class="tags"></div>
+
+<code class="invisible" id="original-tags">{{Tags}}</code>
+
+<script type="text/javascript">
+    if (typeof (cs) == "undefined") {
+        var cs = new CardStorageImageCloze()
+    }
+
+    if (is_mobile && Persistence.isAvailable()) {
+        const csObject = Persistence.getItem()
+        Object.assign(cs, csObject)
+        Persistence.clear()
+    }
+
+    cs.setAllowHit(false)
+
+    var image = document.getElementById('image')
+    var divResizable = document.getElementById('div-outside')
+
+    var divHeight = Persistence.getItem(StoreKeyDivHeight)
+    if(undefined == divHeight)
+        divResizable.style.height =  (window.innerHeight * 0.7) + 'px'
+    else
+        divResizable.style.height = divHeight
+
+    show_tags(takeContent('original-tags'), 'tags', 'tag')
+
+    if (typeof (keyChecker) == "undefined") {
+        keyChecker.uninstall()
+        keyChecker = undefined
+    }
+
+</script>
