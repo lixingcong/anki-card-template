@@ -94,17 +94,27 @@
     if(undefined !== keyChecker)
         keyChecker.uninstall()
 
-    var keyChecker= new EventHistoryTimer('keydown', 60)
+    var keyChecker= new EventHistoryTimer('keypress', 60)
     keyChecker.install(function(e){
         if(e.ctrlKey && e.altKey){
             let show
+            let add
             if(49==e.keyCode)
                 show = true
             else if(50==e.keyCode)
                 show = false
+            else if(51==e.keyCode)
+                add = true
+            else if(52==e.keyCode)
+                add = false
 
             if(undefined !== show){
                 showClozeAnswerByStep(show)
+                return true
+            }
+
+            if(undefined !== add){
+                adjustDivHeight(add)
                 return true
             }
         }
