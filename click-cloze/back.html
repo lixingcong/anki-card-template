@@ -17,7 +17,6 @@
     if (is_mobile && Persistence.isAvailable()) {
         const csObject = Persistence.getItem()
         Object.assign(cs, csObject)
-        Persistence.clear()
     }
 
     show_result(true)

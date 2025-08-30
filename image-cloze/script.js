@@ -146,5 +146,17 @@ function showClozeAnswerByStep(show){
     show_masks()
 }
 
+function adjustDivHeight(add){
+    var divResizable = document.getElementById('div-outside')
+    var height = divResizable.style.height
+    height= height.replace('px','')
+    height = parseFloat(height)
+    height+=(add ? 20 : -20)
+    divResizable.style.height = height + 'px'
+
+    if (Persistence.isAvailable())
+        Persistence.setItem(StoreKeyDivHeight, divResizable.style.height)
+}
+
 // for debug only
 module.exports = { CardStorage }

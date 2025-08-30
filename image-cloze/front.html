@@ -1,4 +1,10 @@
 <div>{{title}}</div>
+
+<div class="float-right" id="adjust-height">
+    <button onclick="adjustDivHeight(true)">高度+</button>
+    <button onclick="adjustDivHeight(false)">高度-</button>
+</div>
+
 <div class="div-outside" id="div-outside">
     <div class="div-inside">
         <img id="image" class="covered-image" src="{{image}}"></img>
@@ -29,6 +35,8 @@
             if (Persistence.isAvailable())
                 Persistence.setItem(cs)
         }
+    }else{
+        document.getElementById('adjust-height').remove()
     }
 
     var canvas = document.getElementById('canvas')

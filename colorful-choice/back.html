@@ -23,7 +23,6 @@
     if (is_mobile && Persistence.isAvailable()) {
         var csObject = Persistence.getItem()
         Object.assign(cs, csObject)
-        Persistence.clear()
     }
 
     init_options(false)
