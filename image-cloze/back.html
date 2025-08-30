@@ -46,7 +46,7 @@
 
     show_tags(takeContent('original-tags'), 'tags', 'tag')
 
-    if (typeof (keyChecker) == "undefined") {
+    if(undefined !== keyChecker){
         keyChecker.uninstall()
         keyChecker = undefined
     }
