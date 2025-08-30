@@ -1,4 +1,4 @@
-function CardStorage() {
+function CardStorageColorfulChoice() {
     this.options_text = [] // ['SelA','SelB','SelC']
     this.options_prefix = [] // ['A','B','C']
 

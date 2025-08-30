@@ -12,12 +12,7 @@
 <code class="invisible" id="original-tags">{{Tags}}</code>
 
 <script type="text/javascript">
-    if (typeof (cs) == "undefined") {
-        const script = document.createElement('script')
-        script.innerHTML = "var cs = new CardStorage();"
-        document.head.appendChild(script)
-    }
-
+    var cs = new CardStorageClickCloze()
     cs.build(takeContent('original-content'))
 
     show_result(false)

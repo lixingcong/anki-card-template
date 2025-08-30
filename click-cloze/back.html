@@ -11,9 +11,7 @@
 
 <script type="text/javascript">
     if (typeof (cs) == "undefined") {
-        const script = document.createElement('script')
-        script.innerHTML = "var cs = new CardStorage();"
-        document.head.appendChild(script)
+        var cs = new CardStorageClickCloze()
     }
 
     if (is_mobile && Persistence.isAvailable()) {

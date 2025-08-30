@@ -1,4 +1,4 @@
-function CardStorage() {
+function CardStorageClickCloze() {
     this.results = []
     this.clickClozeCount = 0 // 可以点击的个数
 
