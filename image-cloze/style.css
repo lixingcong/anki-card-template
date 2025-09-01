@@ -30,7 +30,7 @@
     min-height: 2em;
     resize: vertical;
     border: 1px dashed var(--image-border);
-    overflow: auto;
+    overflow: hidden;
 }
 
 .div-inside {
@@ -47,6 +47,8 @@
     left: 0;
     right: 0;
     margin-inline: auto;
+    /* 避免点击过快，变成双击，选中，变蓝，很难看 */
+    user-select: none;
 }
 
 .covering-canvas {
@@ -56,6 +58,7 @@
     right: 0;
     margin-inline: auto;
     /* background-color: rgba(255, 0, 0, .1); */
+    /* 这个值要大于1 */
     z-index: 2;
 }
 

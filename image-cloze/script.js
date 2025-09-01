@@ -47,12 +47,23 @@ function CardStorageImageCloze() {
             return -1
 
         const p = this.mapFromImage(x,y,this.imageWidth, this.imageHeight)
-        for(let i =0;i<this.rects.length;++i){
-            const r = this.rects[i]
-            if(p.x >= r.x && p.y >= r.y && p.x <= r.x+r.w && p.y <= r.y+r.h)
-                return i
-        }
-        return -1
+
+        let minimalAreaIndex = -1
+        let minimalArea = Number.MAX_VALUE
+
+        this.rects.map(r => {
+            return {
+                hit: (p.x >= r.x && p.y >= r.y && p.x <= r.x+r.w && p.y <= r.y+r.h),
+                area: r.w * r.w
+            }
+        }).forEach((a, idx) => {
+            if(a.hit && a.area < minimalArea){
+                minimalAreaIndex = idx
+                minimalArea = a.area
+            }
+        })
+
+        return minimalAreaIndex
     }
 
     this.setAllowHit = function(b){
