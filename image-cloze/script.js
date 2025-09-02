@@ -170,4 +170,4 @@ function adjustDivHeight(add){
 }
 
 // for debug only
-module.exports = { CardStorage }
+module.exports = { CardStorageImageCloze }

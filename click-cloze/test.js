@@ -3,7 +3,7 @@ const text = `支持[[『PDF、Word、Xmind、幕布、Markdown、Excel、微信
 `
 
 const API = require('./script.js')
-const cs = new API.CardStorage()
+const cs = new API.CardStorageClickCloze()
 
 cs.build(text)
 

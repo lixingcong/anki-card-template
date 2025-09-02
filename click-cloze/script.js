@@ -119,4 +119,4 @@ function showClozeAnswerByStep(show){
 }
 
 // for debug only
-module.exports = { CardStorage }
+module.exports = { CardStorageClickCloze }

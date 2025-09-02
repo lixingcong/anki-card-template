@@ -216,4 +216,4 @@ function shuffle(count){
 }
 
 // for debug only
-module.exports ={CardStorage, shuffle}
+module.exports ={CardStorageColorfulChoice, shuffle}
