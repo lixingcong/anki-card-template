@@ -37,9 +37,9 @@
     keyChecker.install(function(e){
         if(e.ctrlKey && e.altKey){
             let show
-            if(49==e.keyCode)
+            if('1'==e.key)
                 show = true
-            else if(50==e.keyCode)
+            else if('2'==e.key)
                 show = false
 
             if(undefined !== show){
