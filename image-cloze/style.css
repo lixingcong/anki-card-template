@@ -6,6 +6,7 @@
     --tag-border: #525252;
     --image-border: #525252;
     --show-notes-btn: #525252;
+    --clickable-label: #525252;
 }
 
 .tags {
@@ -64,4 +65,11 @@
 
 .float-right{
     float: right;
+}
+
+.clickable-label {
+    user-select: none;
+    font-size: 0.8em;
+    color: var(--clickable-label);
+    padding: 0.1em 1em;
 }
