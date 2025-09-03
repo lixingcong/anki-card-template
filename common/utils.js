@@ -1,8 +1,8 @@
-function EventHistoryTimer(eventName, interval){ // 事件定时器，在间隔interval（毫秒）内收集eventName所有事件，然后统一处理
+function EventHistoryTimer(eventNames, interval){ // 事件定时器，在间隔interval（毫秒）内收集eventName所有事件，然后统一处理
     this.check = undefined
     this.timer = undefined
     this.history = []
-    this.eventName = eventName // eventName 事件名，如'keydown'
+    this.eventNames = eventNames // eventName 事件名，如['keydown', 'keypress']
     this.interval = interval
 
     this.timeout = function(instance){ // 没法直接传递this，因此手动传入instance
@@ -13,7 +13,8 @@ function EventHistoryTimer(eventName, interval){ // 事件定时器，在间隔i
 
         instance.timer = undefined
         instance.history.length = 0
-        document.addEventListener(instance.eventName, instance, {once: true})
+        for(const eventName of instance.eventNames)
+            document.addEventListener(eventName, instance, {once: true})
     }
 
     this.handleEvent = function(event) { // 使用固定名字函数 https://stackoverflow.com/a/19507086/5271632
@@ -30,7 +31,8 @@ function EventHistoryTimer(eventName, interval){ // 事件定时器，在间隔i
     this.uninstall=function(){
         if(this.check){
             this.check=undefined
-            document.removeEventListener(this.eventName, this, {once: true})
+            for(const eventName of this.eventNames)
+                document.removeEventListener(eventName, this, {once: true})
         }
     }
 }
