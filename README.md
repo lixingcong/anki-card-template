@@ -72,6 +72,11 @@ function flipToBack() {
 
 注意front.html中绑定一个keyup事件，编辑卡片时，会再次绑定，导致重复触发。解决：使用定时器（类似`QTimer::singleShot`实现）
 
+关于按键事件的bug
+
+- linux，监听事件使用keydown是可以的，使用keypress不可以（因为keypress已经被废弃了）
+- windows，使用keydown监听，不兼容外接sayo小键盘
+
 ## 传给js的字符串有转义
 
 考察以下代码
