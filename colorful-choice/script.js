@@ -11,10 +11,12 @@ function CardStorageColorfulChoice() {
     this.selected = [] // [false, false, true, false] 给外界选中的，数组下标是映射后的
     this.indeterminate = false // 不定项
 
-    this.build = function(options, answers){
+    this.notes = ''
+
+    this.build = function(options, answers, notes){
         const options_splited = options.split(/<br>/g).map(s => s.trim()).filter(s => s.length>0)
         this.options_text = options_splited.map(s => s.replace(/^[\x00-\x7F][\.\|、\s]{1,}/i, ''))
-        this.options_prefix = options_splited.map(s => s[0]) // 这里只取一个字符
+        const orignal_options_prefix = options_splited.map(s => s[0]) // 这里只取一个字符
 
         const answerArray = answers.split('')
         if (answerArray.length > 0 && '?' == answerArray[0]) {
@@ -25,8 +27,8 @@ function CardStorageColorfulChoice() {
         }
 
         this.answer_idxes = []
-        for(let i = 0; i<this.options_prefix.length;++i){
-            const option_prefix = this.options_prefix[i]
+        for(let i = 0; i<orignal_options_prefix.length;++i){
+            const option_prefix = orignal_options_prefix[i]
 
             for(let j =0; j<answerArray.length;++j){
                 if(answerArray[j] == option_prefix){ // found correct answer index
@@ -37,13 +39,23 @@ function CardStorageColorfulChoice() {
         }
         this.answer_idxes.sort()
 
-        this.options_prefix = this.options_prefix.map((_, idx) => String.fromCharCode(idx + 65)) // map to A...
+        this.options_prefix = orignal_options_prefix.map((_, idx) => String.fromCharCode(idx + 65)) // map to A...
 
         this.single_choice = this.answer_idxes.length <= 1
 
         const shuffled = shuffle(this.options_prefix.length)
         this.to_shuffled = shuffled[0]
         this.from_shuffled = shuffled[1]
+
+        if(typeof(notes) === 'string' && notes.length > 0){
+            for(let i =0;i<this.options_prefix.length;++i){ // 映射notes中的选项
+                const pattern = '[[' + orignal_options_prefix[i] + ']]'
+                const replacement = this.options_prefix[this.to_shuffled[i]]
+                notes = notes.replaceAll(pattern, replacement)
+            }
+            this.notes = notes
+        }else
+            this.notes = ''
 
         this.reset_selected()
     }
@@ -187,8 +199,8 @@ function show_results() {
 
     const ca = cs.correct_answers().join('')
     const ya = cs.selected_answers().join('')
-    document.getElementById(C.IdCorrectAnswer).innerHTML = ca
-    document.getElementById(C.IdYourAnswer).innerHTML = (ya == ca) ? '太棒了！': '你选了' + ya
+    setInnerHtml(C.IdCorrectAnswer, ca)
+    setInnerHtml(C.IdYourAnswer, (ya == ca) ? '太棒了！': '你选了' + ya)
 }
 
 function shuffle(count){

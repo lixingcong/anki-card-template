@@ -54,6 +54,12 @@ function takeContent(id) {
     return ''
 }
 
+function setInnerHtml(id, h){
+    const e = document.getElementById(id)
+    if(e)
+        e.innerHTML = h
+}
+
 function show_tags(tags, divId, tagClass){
     if (tags){
         div = document.getElementById(divId)

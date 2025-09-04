@@ -8,7 +8,7 @@
 <hr>
 
 {{#notes}}
-<span id="notes">{{notes}}</span>
+<div id="notes"></div>
 {{/notes}}
 
 <div id="tags" class="tags"></div>
@@ -28,6 +28,7 @@
     init_options(false)
     show_results()
     show_tags(takeContent('original-tags'), 'tags', 'tag')
+    setInnerHtml('notes', cs.notes)
 
     if(undefined !== keyChecker){
         keyChecker.uninstall()

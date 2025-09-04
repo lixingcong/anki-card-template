@@ -3,21 +3,23 @@
 
 {{#notes}}
 <div><li onclick="showNotes(this)" class="show-notes-btn">⊙</li></div>
-<span id="notes" style="display: none">{{notes}}</span>
+<div id="notes" style="display: none"></div>
 {{/notes}}
 
 <div id="tags" class="tags"></div>
 
 <code class="invisible" id="original-options">{{options}}</code>
 <code class="invisible" id="original-tags">{{Tags}}</code>
+<code class="invisible" id="original-notes">{{#notes}}{{notes}}{{/notes}}</code>
 
 <script type="text/javascript">
     var cs = new CardStorageColorfulChoice()
 
-    cs.build(takeContent('original-options'), '{{answer}}'.trim())
+    cs.build(takeContent('original-options'), '{{answer}}'.trim(), takeContent('original-notes'))
 
     init_options(true)
     show_tags(takeContent('original-tags'), 'tags', 'tag')
+    setInnerHtml('notes', cs.notes)
 
     if(is_mobile){
         window.onunload = function() {

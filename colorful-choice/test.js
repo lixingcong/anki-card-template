@@ -27,7 +27,7 @@ if(1){
 
 if(1){
     const specialOptions='x.陨石<br>y.房子<br>z.天空<br>4.月亮<br>@.猴子<br>6.蜻蜓<br>7.手机<br>8.苹果<br>9.乡村'
-    cs.build(specialOptions, 'zy')
+    cs.build(specialOptions, 'zy', 'hint,[[z]],[[y]]')
     console.log('多选，正确答案是房子和天空，构造函数', JSON.stringify(cs), '\n')
     console.log('随机后', JSON.stringify(cs.shuffled_options()), '\n')
     console.log('没有选中，交卷', JSON.stringify(cs.commit()))
@@ -42,7 +42,7 @@ if(1){
 }
 
 if(1){
-    cs.build(options, 'DC')
+    cs.build(options, 'DC', 'hint,[[D]],[[C]]')
 
     console.log('多选，正确答案是第3,4项，构造函数', JSON.stringify(cs), '\n')
     console.log('随机后', JSON.stringify(cs.shuffled_options()), '\n')
@@ -56,7 +56,7 @@ if(1){
     console.log('答案：', cs.correct_answers(), '你的选择：', cs.selected_answers())
     console.log('-------------------------')
 
-    cs.build(options, 'AE')
+    cs.build(options, 'AE', 'hint,[[A]],[[E]]')
 
     console.log('多选，正确答案是第1,5项，构造函数', JSON.stringify(cs), '\n')
     console.log('随机后', JSON.stringify(cs.shuffled_options()), '\n')
@@ -73,7 +73,7 @@ if(1){
 }
 
 if(1){
-    cs.build(options, 'D')
+    cs.build(options, 'D', 'hint,[[D]]')
 
     console.log('单选，正确答案是第4项，构造函数', JSON.stringify(cs), '\n')
     console.log('随机后', JSON.stringify(cs.shuffled_options()), '\n')
@@ -88,7 +88,7 @@ if(1){
     console.log('答案：', cs.correct_answers(), '你的选择：', cs.selected_answers())
     console.log('-------------------------');
 
-    cs.build(options, 'A')
+    cs.build(options, 'A', 'hint,[[A]]')
 
     console.log('单选，正确答案是第1项，构造函数', JSON.stringify(cs), '\n')
     console.log('随机后', JSON.stringify(cs.shuffled_options()), '\n')
