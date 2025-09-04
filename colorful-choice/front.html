@@ -34,7 +34,7 @@
     if(undefined !== keyChecker)
         keyChecker.uninstall()
 
-    var keyChecker= new EventHistoryTimer(['keypress','keydown'], 60)
+    var keyChecker= new EventHistoryTimer(['keydown'], 60)
     keyChecker.install(function(e){
         if(e.ctrlKey && e.altKey && e.key.length == 1){
             const idx = e.key.charCodeAt(0) - 49
