@@ -44,24 +44,26 @@ var C = Object.freeze({ // Constant
 var ClickedClozeIndex = 0 // 揭开过cloze答案的序号
 
 function show_result(always) {
-    const div = document.getElementById(C.IdContent)
     ClickedClozeIndex = 0
     let clickClozeCount = 0
+    let fullHtml = ''
 
     for (const r of cs.results) {
         if (always || !r.hidden) {
-            div.innerHTML += r.text
+            fullHtml += r.text
         } else {
             const span = document.createElement('span')
             span.id = index_to_id(clickClozeCount)
             span.innerHTML = C.Spaces
             span.className = C.ClassHidden
             span.setAttribute(C.Answer, r.text)
-            div.appendChild(span)
+            fullHtml += span.outerHTML
 
             ++clickClozeCount
         }
     }
+
+    document.getElementById(C.IdContent).innerHTML = fullHtml
 
     document.querySelectorAll('.' + C.ClassHidden).forEach(function (span) {
         span.onclick = function () {
