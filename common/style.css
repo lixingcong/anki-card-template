@@ -1,3 +1,20 @@
 .invisible{
     display: none;
 }
+
+table, th, td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    padding: 0.2em 0.1em;
+}
