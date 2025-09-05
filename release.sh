@@ -12,9 +12,6 @@ if [[ ! -d $INPUT_DIR ]]; then
 fi
 
 OUTPUT_DIR=/tmp/$INPUT_DIR
-rm -rf $OUTPUT_DIR
-mkdir $OUTPUT_DIR
-
 COMMON_DIR=common
 
 IN_FRONT=$INPUT_DIR/front.html
@@ -28,6 +25,15 @@ IN_COMMON_STYLE=$COMMON_DIR/style.css
 OUT_FRONT=$OUTPUT_DIR/front.html
 OUT_BACK=$OUTPUT_DIR/back.html
 OUT_STYLE=$OUTPUT_DIR/style.css
+
+if ! [[ -f $IN_FRONT && -f $IN_BACK ]]; then
+    echo "Failed: can not find $IN_FRONT or $IN_BACK"
+    exit 1
+fi
+
+# clean up
+rm -rf $OUTPUT_DIR
+mkdir -p $OUTPUT_DIR
 
 cp $IN_FRONT $OUT_FRONT
 cp $IN_BACK $OUT_BACK
