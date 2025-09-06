@@ -45,30 +45,35 @@
 
     var divHeight = Persistence.getItem(StoreKeyDivHeight)
     if(undefined == divHeight)
-        divResizable.style.height =  (window.innerHeight * 0.8) + 'px'
+        divResizable.style.height =  (window.innerHeight * 0.7) + 'px'
     else
         divResizable.style.height = divHeight
 
     if(undefined !== resizeObserver)
-        resizeObserver.unobserve(image)
+        resizeObserver.disconnect()
 
     var resizeObserver = new ResizeObserver(entries => {
-        const first = entries[0].contentRect
-        cs.imageWidth = first.width
-        cs.imageHeight = first.height
+        for(const entry of entries){
+            if(entry.target == image){
+                const r = entry.contentRect
+                cs.imageWidth = r.width
+                cs.imageHeight = r.height
 
-        canvas.style.width = cs.imageWidth + 'px'
-        canvas.style.height = cs.imageHeight + 'px'
-        canvas.width = cs.imageWidth
-        canvas.height = cs.imageHeight
+                canvas.style.width = cs.imageWidth + 'px'
+                canvas.style.height = cs.imageHeight + 'px'
+                canvas.width = cs.imageWidth
+                canvas.height = cs.imageHeight
 
-        show_masks()
-
-        if (Persistence.isAvailable())
-            Persistence.setItem(StoreKeyDivHeight, divResizable.style.height)
+                show_masks()
+            }else if(entry.target == divResizable){
+                if (Persistence.isAvailable())
+                    Persistence.setItem(StoreKeyDivHeight, entry.contentRect.height + 'px')
+            }
+        }
     })
 
     resizeObserver.observe(image)
+    resizeObserver.observe(divResizable)
 
     canvas.onmousedown = (e) => {
         const clientRect = canvas.getBoundingClientRect();
