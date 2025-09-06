@@ -165,7 +165,7 @@ function init_options(bindClick) {
 
 function toggle(option_idx) {
     const li = document.getElementById(index_to_id(option_idx))
-    const oldState = li.className.indexOf(C.ClassSelected) >= 0
+    const oldState = li.classList.contains(C.ClassSelected)
 
     // set to model
     cs.toggle(option_idx, !oldState)

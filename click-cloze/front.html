@@ -37,13 +37,23 @@
     keyChecker.install(function(e){
         if(e.ctrlKey && e.altKey){
             let show
+            let forward
             if('1'==e.key)
                 show = true
             else if('2'==e.key)
                 show = false
+            else if('3'==e.key)
+                forward=true
+            else if('4'==e.key)
+                forward=false
 
             if(undefined !== show){
                 showClozeAnswerByStep(show)
+                return true
+            }
+
+            if(undefined !== forward){
+                selectClozeByStep(forward)
                 return true
             }
         }

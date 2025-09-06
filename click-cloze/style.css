@@ -5,6 +5,7 @@
 :root{
     --tag-border: #525252;
     --cloze-underline: #6f6f6f;
+    --cloze-selected: #75543f;
     --hr: #525252;
     --show-notes-btn: #525252;
 }
@@ -42,4 +43,9 @@ hr {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     cursor: pointer;
+}
+
+.cloze-selected {
+    color: white;
+    background-color: var(--cloze-selected);
 }

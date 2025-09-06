@@ -74,7 +74,7 @@ function show_result(always) {
 
 function clozeAnswerHidden(idx){
     const span = document.getElementById(index_to_id(idx))
-    return span.className.indexOf(C.ClassHidden) >= 0
+    return span.classList.contains(C.ClassHidden)
 }
 
 // 参数show可能的值：undefined, true, false
@@ -82,7 +82,7 @@ function showClozeAnswer(idx, show){
     ClickedClozeIndex = idx
 
     const span = document.getElementById(index_to_id(idx))
-    const hidden = span.className.indexOf(C.ClassHidden) >= 0
+    const hidden = span.classList.contains(C.ClassHidden)
 
     if (undefined === show)
         show = hidden; // toggle
@@ -96,28 +96,49 @@ function showClozeAnswer(idx, show){
     }
 }
 
-// 用键盘控制的显示和隐藏cloze答案，参数show: true/false
-function showClozeAnswerByStep(show){
+// expectAnswerHidden参数：undefined固定步进为1；true步进为N，找出答案被盖住的下一个；false步进为N，找出答案没有被盖的下一个
+function nextClickIdx(forward, expectAnswerHidden){
     let idx = ClickedClozeIndex
     if(idx < 0 || idx >= cs.clickClozeCount)
-        return; // overflow
+        return -1 // overflow
 
-    const step = show ? 1 : -1;
-    while(clozeAnswerHidden(idx) != show){
+    const step = forward ? 1 : -1;
+    while(clozeAnswerHidden(idx) !== expectAnswerHidden){
         idx += step // next or prev
 
         if (idx < 0) {
-            ClickedClozeIndex = 0 // reset to first
-            return;
+            return 0 // first
         }
 
         if (idx >= cs.clickClozeCount) {
-            ClickedClozeIndex = cs.clickClozeCount - 1 // reset to last
-            return;
+            return cs.clickClozeCount - 1 // last
         }
+
+        if(undefined === expectAnswerHidden) // only one step
+            break
     }
 
-    showClozeAnswer(idx, show)
+    return idx
+}
+
+// 用键盘控制的显示和隐藏cloze答案，参数show: true/false
+function showClozeAnswerByStep(show){
+    const idx = nextClickIdx(show, show)
+    if(idx>=0)
+        showClozeAnswer(idx, show)
+}
+
+function selectClozeByStep(forward){
+    const idx = nextClickIdx(forward, undefined)
+
+    if(idx >= 0){
+        ClickedClozeIndex = idx
+
+        const span = document.getElementById(index_to_id(idx))
+        span.classList.add('cloze-selected')
+        span.scrollIntoView({ block: 'center' })
+        setTimeout(() => {span.classList.remove('cloze-selected')}, 400)
+    }
 }
 
 // for debug only
