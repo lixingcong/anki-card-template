@@ -11,11 +11,12 @@
 <code class="invisible" id="original-options">{{options}}</code>
 <code class="invisible" id="original-tags">{{Tags}}</code>
 <code class="invisible" id="original-notes">{{#notes}}{{notes}}{{/notes}}</code>
+<code class="invisible" id="original-answer">{{answer}}</code>
 
 <script type="text/javascript">
     var cs = new CardStorageColorfulChoice()
 
-    cs.build(takeContent('original-options'), '{{answer}}'.trim(), takeContent('original-notes'))
+    cs.build(takeContent('original-options'), takeContent('original-answer'), takeContent('original-notes'))
 
     init_options(true)
     show_tags(takeContent('original-tags'), 'tags', 'tag')
