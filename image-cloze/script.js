@@ -77,6 +77,7 @@ function CardStorageImageCloze() {
 
 var ClickedClozeIndex = 0 // 揭开过cloze答案的序号
 var StoreKeyDivHeight = 'lxc-mask-div-height'
+var DefaultDivHeight = `${window.innerHeight * 0.7}px` // 默认图片高度，值大就浪费屏幕空间，值小就看不清图片
 
 function show_masks() {
     const canvas = document.getElementById('canvas')
@@ -158,12 +159,12 @@ function showClozeAnswerByStep(show){
 }
 
 function adjustDivHeight(add){
-    var divResizable = document.getElementById('div-outside')
-    var height = divResizable.style.height
+    const divResizable = document.getElementById('div-outside')
+    let height = divResizable.style.height
     height= height.replace('px','')
     height = parseFloat(height)
     height+=(add ? 20 : -20)
-    divResizable.style.height = height + 'px'
+    divResizable.style.height = `${height}px`
 
     if (Persistence.isAvailable())
         Persistence.setItem(StoreKeyDivHeight, divResizable.style.height)

@@ -45,7 +45,7 @@
 
     var divHeight = Persistence.getItem(StoreKeyDivHeight)
     if(undefined == divHeight)
-        divResizable.style.height =  (window.innerHeight * 0.7) + 'px'
+        divResizable.style.height = DefaultDivHeight
     else
         divResizable.style.height = divHeight
 
@@ -59,15 +59,15 @@
                 cs.imageWidth = r.width
                 cs.imageHeight = r.height
 
-                canvas.style.width = cs.imageWidth + 'px'
-                canvas.style.height = cs.imageHeight + 'px'
+                canvas.style.width = `${cs.imageWidth}px`
+                canvas.style.height = `${cs.imageHeight}px`
                 canvas.width = cs.imageWidth
                 canvas.height = cs.imageHeight
 
                 show_masks()
             }else if(entry.target == divResizable){
                 if (Persistence.isAvailable())
-                    Persistence.setItem(StoreKeyDivHeight, entry.contentRect.height + 'px')
+                    Persistence.setItem(StoreKeyDivHeight, `${entry.contentRect.height}px`)
             }
         }
     })
