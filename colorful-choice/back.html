@@ -21,7 +21,7 @@
     }
 
     if (is_mobile && Persistence.isAvailable()) {
-        var csObject = Persistence.getItem()
+        const csObject = Persistence.getItem()
         Object.assign(cs, csObject)
     }
 

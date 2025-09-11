@@ -6,7 +6,7 @@ function EventHistoryTimer(eventNames, interval){ // 事件定时器，在间隔
     this.interval = interval
 
     this.timeout = function(instance){ // 没法直接传递this，因此手动传入instance
-        for(var e of instance.history){
+        for(const e of instance.history){
             if(instance.check(e))
                 break
         }
@@ -46,7 +46,7 @@ function id_to_index(id){
 }
 
 function takeContent(id) {
-    var e = document.getElementById(id) // 查找id并返回该html内容，然后移除该元素
+    const e = document.getElementById(id) // 查找id并返回该html内容，然后移除该元素
     if (e) {
         e.remove()
         return e.innerHTML
@@ -64,8 +64,8 @@ function show_tags(tags, divId, tagClass){
     if (tags){
         div = document.getElementById(divId)
         splited = tags.split(' ')
-        for (var tag of splited) {
-            var span = document.createElement('span')
+        for (const tag of splited) {
+            const span = document.createElement('span')
             span.className = tagClass
             span.innerText = tag
             div.appendChild(span)
