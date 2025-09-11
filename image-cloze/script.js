@@ -89,8 +89,17 @@ function CardStorageImageCloze() {
 var ClickedClozeIndex = 0 // 揭开过cloze答案的序号
 var StoreKeyDivHeight = 'lxc-mask-div-height'
 
-function defaultDivHeight(){
-    return `${window.innerHeight * 0.7}px` // 默认图片高度，值大就浪费屏幕空间，值小就看不清图片
+function loadDivHeight(div)
+{
+    const Saved = Persistence.getItem(StoreKeyDivHeight)
+    const Default = `${window.innerHeight * 0.7}px` // 默认图片高度，值大就浪费屏幕空间，值小就看不清图片
+    div.style.height = ('string' === typeof Saved) ? Saved : Default
+}
+
+function saveDivHeight(px)
+{
+    if (Persistence.isAvailable())
+        Persistence.setItem(StoreKeyDivHeight, `${px}px`)
 }
 
 function show_masks() {

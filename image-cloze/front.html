@@ -43,11 +43,7 @@
     var image = document.getElementById('image')
     var divResizable = document.getElementById('div-outside')
 
-    var divHeight = Persistence.getItem(StoreKeyDivHeight)
-    if(undefined == divHeight)
-        divResizable.style.height = defaultDivHeight()
-    else
-        divResizable.style.height = divHeight
+    loadDivHeight(divResizable)
 
     if(undefined !== resizeObserver)
         resizeObserver.disconnect()
@@ -66,8 +62,7 @@
 
                 show_masks()
             }else if(entry.target == divResizable){
-                if (Persistence.isAvailable())
-                    Persistence.setItem(StoreKeyDivHeight, `${entry.contentRect.height}px`)
+                saveDivHeight(entry.contentRect.height)
             }
         }
     })

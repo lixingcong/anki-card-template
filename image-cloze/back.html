@@ -38,11 +38,7 @@
     var image = document.getElementById('image')
     var divResizable = document.getElementById('div-outside')
 
-    var divHeight = Persistence.getItem(StoreKeyDivHeight)
-    if(undefined == divHeight)
-        divResizable.style.height = defaultDivHeight()
-    else
-        divResizable.style.height = divHeight
+    loadDivHeight(divResizable)
 
     show_tags(takeContent('original-tags'), 'tags', 'tag')
 
