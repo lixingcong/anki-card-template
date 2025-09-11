@@ -45,7 +45,7 @@
 
     var divHeight = Persistence.getItem(StoreKeyDivHeight)
     if(undefined == divHeight)
-        divResizable.style.height = DefaultDivHeight
+        divResizable.style.height = defaultDivHeight()
     else
         divResizable.style.height = divHeight
 

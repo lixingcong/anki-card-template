@@ -10,24 +10,24 @@ if(1){
 
 if(1){
     const text = `[{"x":0.5,"y":0.55,"w":0.1,"h":0.1}, {"x":0.9,"y":0.95,"w":0.1,"h":0.1}]`
-    cs.build(text)
+    const ImageWidth = 100
+    const ImageHeight = 100
+
+    cs.build(text);
+    [cs.imageWidth, cs.imageHeight] = [ImageWidth, ImageHeight]
+
     console.log(JSON.stringify(cs))
 
-    const ImageWidth = 100
-    const imageHeight = 100
+    console.log('mapFromImage(10,10)=', cs.mapFromImage(10,10))
+    console.log('mapFromImage(90,90)=', cs.mapFromImage(90,90))
 
-    console.log('W=',ImageWidth, 'H=',imageHeight)
-
-    console.log('mapFromImage(10,10)=', cs.mapFromImage(10,10,ImageWidth,imageHeight))
-    console.log('mapFromImage(90,90)=', cs.mapFromImage(90,90,ImageWidth,imageHeight))
-
-    console.log('mapToImage(0)=', cs.mapToImage(0,ImageWidth,imageHeight))
-    console.log('mapToImage(1)=', cs.mapToImage(1,ImageWidth,imageHeight))
+    console.log('mapToImage(0)=', cs.mapToImage(0))
+    console.log('mapToImage(1)=', cs.mapToImage(1))
 
     const hitCase = [[10,10],[50,50],[50,55],[60,55],[60,60],[60,65],[65,65], [90,90],[100,100]]
 
     for(const h of hitCase)
-        console.log('hit', h, '=',cs.hit(h[0],h[1],ImageWidth,imageHeight))
+        console.log('hit', h, '=',cs.hit(h[0],h[1]))
 
     console.log('------------------------')
 }

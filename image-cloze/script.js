@@ -19,7 +19,9 @@ function CardStorageImageCloze() {
                     this.rects.push(rect)
                 }
             }
-        } catch (error) { }
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     this.mapToImage = function(idx){
@@ -86,7 +88,10 @@ function CardStorageImageCloze() {
 
 var ClickedClozeIndex = 0 // 揭开过cloze答案的序号
 var StoreKeyDivHeight = 'lxc-mask-div-height'
-var DefaultDivHeight = `${window.innerHeight * 0.7}px` // 默认图片高度，值大就浪费屏幕空间，值小就看不清图片
+
+function defaultDivHeight(){
+    return `${window.innerHeight * 0.7}px` // 默认图片高度，值大就浪费屏幕空间，值小就看不清图片
+}
 
 function show_masks() {
     const canvas = document.getElementById('canvas')
