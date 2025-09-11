@@ -8,7 +8,7 @@ function CardStorageImageCloze() {
         this.rects = []
         this.imageWidth = 0
         this.imageHeight = 0
-        this.allowHit
+        this.allowHit = true
 
         try {
             const J = JSON.parse(str)
@@ -19,8 +19,8 @@ function CardStorageImageCloze() {
                     this.rects.push(rect)
                 }
             }
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
         }
     }
 
