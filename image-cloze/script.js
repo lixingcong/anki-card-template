@@ -52,9 +52,18 @@ function CardStorageImageCloze() {
         let minimalArea = Number.MAX_VALUE
 
         this.rects.map(r => {
+            const TL = { x: r.x, y: r.y } // top left
+            const BR = { x: r.x + r.w, y: r.y + r.h } // bottom right
+
+            if (r.w < 0)
+                [TL.x, BR.x] = [BR.x, TL.x]
+
+            if (r.h < 0)
+                [TL.y, BR.y] = [BR.y, TL.y]
+
             return {
-                hit: (p.x >= r.x && p.y >= r.y && p.x <= r.x+r.w && p.y <= r.y+r.h),
-                area: r.w * r.w
+                hit: (p.x >= TL.x && p.x <= BR.x && p.y >= TL.y && p.y <= BR.y),
+                area: Math.abs(r.w * r.h)
             }
         }).forEach((a, idx) => {
             if(a.hit && a.area < minimalArea){
