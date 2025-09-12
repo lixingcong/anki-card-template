@@ -37,6 +37,12 @@ hr {
     cursor: pointer;
 }
 
+.cloze-show::before{
+    content: "☉";
+    font-size: 0.4em;
+    vertical-align: top;
+}
+
 .cloze-hide {
     color: var(--cloze-underline);
     margin:0 0.1em;
