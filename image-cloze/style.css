@@ -73,3 +73,7 @@
     color: var(--clickable-label);
     padding: 0.1em 1em;
 }
+
+.title {
+    text-align: center;
+}
