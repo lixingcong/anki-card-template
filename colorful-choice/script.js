@@ -200,7 +200,8 @@ function show_results() {
     const ca = cs.correct_answers().join('')
     const ya = cs.selected_answers().join('')
     setInnerHtml(C.IdCorrectAnswer, ca)
-    setInnerHtml(C.IdYourAnswer, (ya == ca) ? '太棒了！': '你选了' + ya)
+    if (ya.length > 0)
+        setInnerHtml(C.IdYourAnswer, (ya == ca) ? '，太棒了！' : '，你选了' + ya)
 }
 
 function shuffle(count){
