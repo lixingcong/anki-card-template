@@ -25,7 +25,7 @@ function CardStorageClickCloze() {
         }
 
         if (lastPos < text.length - 1)
-            this.appendResult(false, text.slice(lastPos, text.length - 1))
+            this.appendResult(false, text.slice(lastPos, text.length))
     }
 
     this.appendResult = function (h, t) {
