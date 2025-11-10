@@ -70,5 +70,8 @@ echo "" >> $OUT_STYLE
 
 echo "</script>" >> $OUT_STYLE
 
+# 移除空白行尾
+sed -e 's/[[:space:]]*$//' -i $OUT_STYLE
+
 # 显示结果
 find $OUTPUT_DIR
