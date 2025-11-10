@@ -113,3 +113,19 @@ if(1){
     console.log('多选，不定项，正确答案是第1+2项，构造函数', JSON.stringify(cs), '\n')
     console.log('-------------------------')
 }
+
+if(1){
+    cs.build(options, '', 'hint,[[D]],[[C]]')
+
+    console.log('本题没有答案，构造函数', JSON.stringify(cs), '\n')
+    console.log('随机后', JSON.stringify(cs.shuffled_options()), '\n')
+    console.log('没有选中，交卷', JSON.stringify(cs.commit()))
+
+    cs.toggle(0, true)
+    console.log('选中第一项，交卷', JSON.stringify(cs.commit()))
+
+    cs.toggle(1, true)
+    console.log('选中第二项，交卷', JSON.stringify(cs.commit()))
+    console.log('答案：', cs.correct_answers(), '你的选择：', cs.selected_answers())
+    console.log('-------------------------')
+}

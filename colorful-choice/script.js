@@ -23,7 +23,7 @@ function CardStorageColorfulChoice() {
             this.indeterminate = true
             answerArray.shift()
         } else {
-            this.indeterminate = false
+            this.indeterminate = (0 == answerArray.length) // 没有正确答案的情况，也视作不定项
         }
 
         this.answer_idxes = []
@@ -91,11 +91,10 @@ function CardStorageColorfulChoice() {
 
     // 选中一项
     this.toggle = function(idx, selected){
-        if(0 == this.answer_idxes.length) // Missing
-            return
-
-        if(this.single_choice)
-            this.reset_selected() // 单选模式
+        if(this.answer_idxes.length > 0) { // 有正确答案
+            if(this.single_choice)
+                this.reset_selected() // 单选模式
+        }
 
         this.selected[idx] = selected
     }
@@ -197,11 +196,13 @@ function show_results() {
         }
     }
 
-    const ca = cs.correct_answers().join('')
-    const ya = cs.selected_answers().join('')
+    const answersToText = (arr) => arr.length ? arr.join('') : '无'
+
+    const ca = answersToText(cs.correct_answers())
+    const ya = answersToText(cs.selected_answers())
+
     setInnerHtml(C.IdCorrectAnswer, ca)
-    if (ya.length > 0)
-        setInnerHtml(C.IdYourAnswer, (ya == ca) ? '，太棒了！' : '，你选了' + ya)
+    setInnerHtml(C.IdYourAnswer, (ya == ca) ? '，太棒了！' : '，你选了' + ya)
 }
 
 function shuffle(count){
