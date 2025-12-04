@@ -71,6 +71,9 @@
     resizeObserver.observe(divResizable)
 
     canvas.onmousedown = (e) => {
+        if(0 !== e.button) // left button only
+            return
+
         const clientRect = canvas.getBoundingClientRect();
         const startClientX = e.clientX
         const startClientY = e.clientY
