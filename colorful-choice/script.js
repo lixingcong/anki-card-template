@@ -92,8 +92,8 @@ function CardStorageColorfulChoice() {
     // 选中一项
     this.toggle = function(idx, selected){
         if(this.answer_idxes.length > 0) { // 有正确答案
-            if(this.single_choice)
-                this.reset_selected() // 单选模式
+            if(!this.indeterminate && this.single_choice) // 单选模式，非不定项
+                this.reset_selected() // 清除所有已经选中的
         }
 
         this.selected[idx] = selected
