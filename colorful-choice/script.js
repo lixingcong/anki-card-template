@@ -162,6 +162,15 @@ function init_options(bindClick) {
     }
 }
 
+function redraw_selected(){
+    for(let idx =0;idx<cs.selected.length;++idx){
+        let newClass = C.ClassOption
+        if (cs.selected[idx])
+            newClass += ' ' + C.ClassSelected
+        document.getElementById(index_to_id(idx)).className = newClass
+    }
+}
+
 function toggle(option_idx) {
     const li = document.getElementById(index_to_id(option_idx))
     const oldState = li.classList.contains(C.ClassSelected)
@@ -169,13 +178,7 @@ function toggle(option_idx) {
     // set to model
     cs.toggle(option_idx, !oldState)
 
-    // redraw
-    for(let idx =0;idx<cs.selected.length;++idx){
-        let newClass = C.ClassOption
-        if (cs.selected[idx])
-            newClass += ' ' + C.ClassSelected
-        document.getElementById(index_to_id(idx)).className = newClass
-    }
+    redraw_selected()
 }
 
 function show_results() {

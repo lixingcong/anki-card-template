@@ -6,7 +6,7 @@
     --option-border: #525252;
     --tag-border: #525252;
     --hr: #525252;
-    --show-notes-btn: #525252;
+    --small-btn: #525252;
 
     --selected-prefix-text: white;
     --selected-prefix-bg:var(--correct-border);
@@ -91,9 +91,8 @@ hr {
     float: right;
 }
 
-.show-notes-btn {
-    list-style: none;
-    color: var(--show-notes-btn);
+.small-btn {
+    color: var(--small-btn);
 }
 
 .correct:before {
