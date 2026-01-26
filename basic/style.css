@@ -1,6 +1,6 @@
 :root {
     --hr: #525252;
-    --show-notes-btn: #525252;
+    --small-btn: #525252;
     --tag-border: #525252;
     --ref-text: #a9a9a9;
 }
@@ -23,14 +23,11 @@ hr {
     margin: 4px 0;
 }
 
-.show-notes-btn {
-    text-align: right;
-    list-style: none;
-    color: var(--show-notes-btn);
+.small-btn {
+    color: var(--small-btn);
 }
 
 .reference {
-    text-align: right;
     color: var(--ref-text);
     font-size: 0.8em;
 }

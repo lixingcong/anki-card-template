@@ -1,9 +1,13 @@
 {{Front}}
 
 {{#Reference}}
-<div><li onclick="showNotes(this)" class="show-notes-btn">⊙</li></div>
-<div id="notes" class="invisible">{{Reference}}</div>
+<div>
+    <span id="showRefBtn" onclick="showReference(true)" class="small-btn">⊙</span>
+    <span onclick="showReference(false)" class="small-btn float-right">♫</span>
+</div>
+<div id="reference" class="reference invisible">{{Reference}}</div>
 {{/Reference}}
+
 
 <div id="tags" class="tags"></div>
 
@@ -12,8 +16,16 @@
 <script type="text/javascript">
     show_tags(takeContent('original-tags'), 'tags', 'tag')
 
-    function showNotes(li){
-        document.getElementById('notes').className='reference'
-        li.remove()
+    function showReference(b){
+        let eleShow = document.getElementById('reference')
+        let eleHide = document.getElementById('showRefBtn')
+        if(!b)
+            [eleHide, eleShow] = [eleShow, eleHide]
+
+        if(eleShow)
+            eleShow.classList.remove('invisible')
+
+        if(eleHide)
+            eleHide.classList.add('invisible')
     }
 </script>
