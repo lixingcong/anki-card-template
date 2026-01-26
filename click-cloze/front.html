@@ -1,9 +1,15 @@
 <div id="content-div"></div>
 
-{{#notes}}
 <hr>
-<div><li onclick="showNotes(this)" class="show-notes-btn">⊙</li></div>
-<div id="notes" style="display: none">{{notes}}</div>
+<div>
+    {{#notes}}
+    <span id="showNotes" onclick="showNotes(true)" class="small-btn">⊙</span>
+    {{/notes}}
+    <span onclick="resetCloze()" class="small-btn float-right">♫</span>
+</div>
+
+{{#notes}}
+<div id="notes" class="invisible">{{notes}}</div>
 {{/notes}}
 
 <div id="tags" class="tags"></div>
@@ -25,9 +31,24 @@
         }
     }
 
-    function showNotes(li){
-        document.getElementById('notes').style.display = 'block'
-        li.remove()
+    function showNotes(b){
+        let eleShow = document.getElementById('notes')
+        let eleHide = document.getElementById('showNotes')
+        if(!b)
+            [eleHide, eleShow] = [eleShow, eleHide]
+
+        if(eleShow)
+            eleShow.classList.remove('invisible')
+
+        if(eleHide)
+            eleHide.classList.add('invisible')
+    }
+
+    function resetCloze(){
+        showNotes(false)
+        for(let i=0;i<cs.clickClozeCount;++i)
+            showClozeAnswer(i, false)
+        ClickedClozeIndex = 0
     }
 
     if(undefined !== keyChecker)

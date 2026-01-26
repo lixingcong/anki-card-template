@@ -3,7 +3,7 @@
     --cloze-underline: #6f6f6f;
     --cloze-selected: #75543f;
     --hr: #525252;
-    --show-notes-btn: #525252;
+    --small-btn: #525252;
 }
 
 .tags{
@@ -24,9 +24,8 @@ hr {
     margin: 4px 0;
 }
 
-.show-notes-btn {
-    list-style: none;
-    color: var(--show-notes-btn);
+.small-btn {
+    color: var(--small-btn);
 }
 
 .cloze-show {
