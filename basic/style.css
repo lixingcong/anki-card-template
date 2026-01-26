@@ -1,6 +1,4 @@
 :root {
-    --hr: #525252;
-    --small-btn: #525252;
     --tag-border: #525252;
     --ref-text: #a9a9a9;
 }
@@ -14,17 +12,6 @@
     padding: 0em 0.3em;
     border-radius: 5px;
     border: 1px solid var(--tag-border)
-}
-
-hr {
-    border-color: transparent;
-    background-color: transparent;
-    border-top: 1px dashed var(--hr);
-    margin: 4px 0;
-}
-
-.small-btn {
-    color: var(--small-btn);
 }
 
 .reference {

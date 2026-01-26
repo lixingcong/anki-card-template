@@ -26,3 +26,14 @@ td {
 .float-right {
     float: right;
 }
+
+.small-btn {
+    color: #525252;
+}
+
+hr {
+    border-color: transparent;
+    background-color: transparent;
+    border-top: 1px dashed #525252;
+    margin: 4px 0;
+}

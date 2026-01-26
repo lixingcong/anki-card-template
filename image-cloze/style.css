@@ -1,7 +1,6 @@
 :root {
     --tag-border: #525252;
     --image-border: #525252;
-    --small-btn: #525252;
     --clickable-label: #525252;
 }
 
@@ -14,10 +13,6 @@
     padding: 0em 0.3em;
     border-radius: 5px;
     border: 1px solid var(--tag-border)
-}
-
-.small-btn {
-    color: var(--small-btn);
 }
 
 .div-outside {
