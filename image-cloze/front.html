@@ -12,9 +12,15 @@
     </div>
 </div>
 
+<div>
+    {{#notes}}
+    <span id="showNotes" onclick="showNotes(true)" class="small-btn">⊙</span>
+    {{/notes}}
+    <span onclick="resetCover()" class="small-btn float-right">♫</span>
+</div>
+
 {{#notes}}
-<div><li onclick="showNotes(this)" class="show-notes-btn">⊙</li></div>
-<div id="notes" style="display: none">{{notes}}</div>
+<div id="notes" class="invisible">{{notes}}</div>
 {{/notes}}
 
 <div id="tags" class="tags"></div>
@@ -89,9 +95,24 @@
         }
     }
 
-    function showNotes(li){
-        document.getElementById('notes').style.display = 'block'
-        li.remove()
+    function showNotes(b){
+        let eleShow = document.getElementById('notes')
+        let eleHide = document.getElementById('showNotes')
+        if(!b)
+            [eleHide, eleShow] = [eleShow, eleHide]
+
+        if(eleShow)
+            eleShow.classList.remove('invisible')
+
+        if(eleHide)
+            eleHide.classList.add('invisible')
+    }
+
+    function resetCover(){
+        showNotes(false)
+        cs.rects.forEach(r => { r.show = true});
+        show_masks()
+        ClickedClozeIndex = 0
     }
 
     if(undefined !== keyChecker)
