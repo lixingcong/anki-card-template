@@ -24,7 +24,7 @@ function CardStorageClickCloze() {
             lastPos = startPos + length
         }
 
-        if (lastPos < text.length - 1)
+        if (lastPos < text.length)
             this.appendResult(false, text.slice(lastPos, text.length))
     }
 
