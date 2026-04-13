@@ -37,6 +37,7 @@ var C = Object.freeze({ // Constant
     IdContent: 'content-div', // 在Android上用content作为id会同名冲突，因此加上div后缀
     ClassHidden: 'cloze-hide',
     ClassShown: 'cloze-show',
+    ClassSelected: 'cloze-selected',
     Answer: 'answer',
     Spaces: '&nbsp;'.repeat(25) // 这个重复字符总宽度，适合手指点击
 })
@@ -88,11 +89,13 @@ function showClozeAnswer(idx, show){
         show = hidden; // toggle
 
     if (show) {
-        span.innerHTML = span.getAttribute(C.Answer)
         span.className = C.ClassShown
+        span.innerHTML = span.getAttribute(C.Answer)
+        span.classList.add(C.ClassSelected)
+        setTimeout(() => {span.classList.remove(C.ClassSelected)}, 500) // 短暂高亮
     } else {
-        span.innerHTML = C.Spaces
         span.className = C.ClassHidden
+        span.innerHTML = C.Spaces
     }
 }
 
@@ -135,9 +138,9 @@ function selectClozeByStep(forward){
         ClickedClozeIndex = idx
 
         const span = document.getElementById(index_to_id(idx))
-        span.classList.add('cloze-selected')
+        span.classList.add(C.ClassSelected)
         span.scrollIntoView({ block: 'center' })
-        setTimeout(() => {span.classList.remove('cloze-selected')}, 400)
+        setTimeout(() => {span.classList.remove(C.ClassSelected)}, 400)
     }
 }
 
